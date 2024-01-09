@@ -6,11 +6,13 @@ import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import AboutUsPage from "./../pages/AboutUsPage";
 
-import EditCardPage from "../pages/EditCardPage";
+import EditCardPage from "../pages/EditCard/EditCardPage";
 import AuthGuard from "../guard/AuthGuard";
 import ProfilePage from "../pages/ProfilePage";
 import CreateCardPage from "../pages/CreateCardPage";
 import BizGuard from "../guard/BizGuard";
+import FavCards from "../pages/FavCards";
+import MyCards from "../pages/MyCards";
 
 const Router = () => {
   return (
@@ -20,6 +22,8 @@ const Router = () => {
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutUsPage />} />
       <Route path={`${ROUTES.EDITCARD}/:id`} element={<EditCardPage />} />
+      <Route path={ROUTES.FAVCARDS} element={<FavCards />} />
+      <Route path={ROUTES.MYCARDS} element={<MyCards />} />
       <Route
         path={ROUTES.PROFILE}
         element={

@@ -5,7 +5,7 @@ const firstSchema = Joi.object({
   first: Joi.string().min(2).max(256).required(),
 });
 const middleSchema = Joi.object({
-  middle: Joi.string().min(2).max(256),
+  middle: Joi.string().min(2).max(256).allow(""),
 });
 const lastSchema = Joi.object({
   last: Joi.string().min(2).max(256).required(),
@@ -15,13 +15,13 @@ const phoneSchema = Joi.object({
   phone: Joi.string().min(9).max(11).required(),
 });
 const urlSchema = Joi.object({
-  url: Joi.string().min(14),
+  url: Joi.string().min(14).allow(""),
 });
 const altSchema = Joi.object({
-  alt: Joi.string().min(2).max(256),
+  alt: Joi.string().min(2).max(256).allow(""),
 });
 const stateSchema = Joi.object({
-  state: Joi.string().min(2).max(256),
+  state: Joi.string().min(2).max(256).allow(""),
 });
 const countrySchema = Joi.object({
   country: Joi.string().min(2).max(256).required(),

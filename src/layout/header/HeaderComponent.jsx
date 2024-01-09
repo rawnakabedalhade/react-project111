@@ -9,12 +9,15 @@ import Badge from "@mui/material/Badge";
 import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import MenuIcon from "@mui/icons-material/Menu";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import MailIcon from "@mui/icons-material/Mail";
 import NotificationsIcon from "@mui/icons-material/Notifications";
 import MoreIcon from "@mui/icons-material/MoreVert";
 import { Switch } from "@mui/material";
+import { toast } from "react-toastify";
+
 // import { Link } from "react-router-dom";
 // import ROUTES from "../../routes/ROUTES";
 // import NavLinkComponent from "./NavLinkComponent";
@@ -27,13 +30,18 @@ import { Switch } from "@mui/material";
 
 import Links from "./ui/Links";
 import LeftDrawerComponent from "./ui/LeftDrawerComponent";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import FilterComponent from "./ui/FilterComponent";
+import loginContext from "../../store/loginContext";
+import ROUTES from "../../routes/ROUTES";
 
 const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
   const [isOpen, setIsOpen] = useState(false);
+  const { setLogin } = useContext(loginContext);
+  const navigate = useNavigate();
 
   const isMenuOpen = Boolean(anchorEl);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -64,6 +72,21 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   };
   const handleCloseDrawerClick = () => {
     setIsOpen(false);
+  };
+  const handleLogout = () => {
+    setLogin(false);
+    toast.success("🦄 LoggedIn Successfully", {
+      position: "top-right",
+      autoClose: 5000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      progress: undefined,
+      theme: "dark",
+    });
+    localStorage.clear();
+    navigate(ROUTES.LOGIN);
   };
 
   const menuId = "primary-search-account-menu";
@@ -205,6 +228,9 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
               color="inherit"
             >
               <AccountCircle />
+            </IconButton>
+            <IconButton aria-label="logOut" onClick={handleLogout}>
+              <LogoutIcon />
             </IconButton>
           </Box>
           <Box sx={{ display: { xs: "flex", md: "none" } }}>

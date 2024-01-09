@@ -15,4 +15,5 @@ const Search = styled("div")(({ theme }) => ({
     width: "auto",
   },
 }));
+
 export default Search;

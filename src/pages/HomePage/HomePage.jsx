@@ -2,43 +2,15 @@ import Grid from "@mui/material/Grid";
 // import CardComponent from "../../components/CardComponent";
 import CardComponent from "../../Components/CardComponent";
 import Typography from "@mui/material/Typography";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
+import cardContext from "../../store/cardContext";
 
-let initialDataFromServer = [
-  {
-    id: "jrlewk0",
-    title: "title1",
-    subtitle: "subtitle1",
-    body: "body1",
-    img: "/assets/imgs/img1.jpg",
-  },
-  {
-    id: "jrlewk1",
-    title: "title2",
-    subtitle: "subtitle2",
-    body: "body2",
-    img: "/assets/imgs/img2.jpeg",
-  },
-  {
-    id: "jrlewk2",
-    title: "title3",
-    subtitle: "subtitle3",
-    body: "body3",
-    img: "/assets/imgs/img3.jpg",
-  },
-  {
-    id: "jrlewk3",
-    title: "title4",
-    subtitle: "subtitle4",
-    body: "body4",
-    img: "/assets/imgs/img4.png",
-  },
-];
 const HomePage = () => {
-  const [dataFromServer, setDataFromServer] = useState([]);
+  let { setDataFromServer, dataFromServer } = useContext(cardContext);
+
   const navigate = useNavigate();
   useEffect(() => {
     axios

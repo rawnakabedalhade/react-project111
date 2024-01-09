@@ -14,6 +14,8 @@ import ModeIcon from "@mui/icons-material/Mode";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PropTypes from "prop-types";
+import { useContext } from "react";
+import loginContext from "../store/loginContext";
 
 const CardComponent = ({
   title,
@@ -28,6 +30,7 @@ const CardComponent = ({
   onPhone,
   onFavorite,
 }) => {
+  let { login } = useContext(loginContext);
   const handleDeleteClick = () => {
     console.log("delete " + id);
     onDelete(id);
@@ -70,9 +73,13 @@ const CardComponent = ({
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box>
-            <IconButton onClick={handleDeleteClick}>
-              <DeleteIcon />
-            </IconButton>
+            {login.isAdmin && (
+              <IconButton onClick={handleDeleteClick}>
+                <DeleteIcon />
+              </IconButton>
+            )}
+
+            {/* Edit only for my own cards */}
             <IconButton onClick={handleEditeClick}>
               <ModeIcon />
             </IconButton>
@@ -81,9 +88,11 @@ const CardComponent = ({
             <IconButton onClick={handlePhoneClick}>
               <LocalPhoneIcon />
             </IconButton>
-            <IconButton onClick={handleFavoriteClick}>
-              <FavoriteIcon />
-            </IconButton>
+            {login && (
+              <IconButton onClick={handleFavoriteClick}>
+                <FavoriteIcon />
+              </IconButton>
+            )}
           </Box>
         </Box>
       </CardContent>
