@@ -16,6 +16,8 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import PropTypes from "prop-types";
 import { useContext } from "react";
 import loginContext from "../store/loginContext";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../routes/ROUTES";
 
 const CardComponent = ({
   title,
@@ -31,12 +33,14 @@ const CardComponent = ({
   onFavorite,
 }) => {
   let { login } = useContext(loginContext);
+  const navigate = useNavigate();
   const handleDeleteClick = () => {
     console.log("delete " + id);
     onDelete(id);
   };
   const handleEditeClick = () => {
     console.log("create " + id);
+    navigate(`${ROUTES.EDITCARD}/${id}`);
     onEdit(id);
   };
   const handlePhoneClick = () => {

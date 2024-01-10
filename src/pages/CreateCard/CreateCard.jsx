@@ -1,19 +1,19 @@
-import { useEffect, useState, useContext } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
 import { Box, Avatar, Typography, Grid, Button } from "@mui/material";
+import ROUTES from "../../routes/ROUTES.js";
 import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import axios from "axios";
-import TextInputComponent from "../../Components/TextInputComponent.jsx";
-import validateSchema from "../../validation/cardValidation";
-import LoginContext from "../../store/loginContext";
-import { fromServer } from "./normalizeEdit";
+import TextInputComponent from "../../Components/TextInputComponent";
+import { normalizeCtreate } from "./normalizeCreate.js";
 import { toast } from "react-toastify";
-import ROUTES from "../../routes/ROUTES.js";
+import loginContext from "../../store/loginContext.js";
+import validateSchema from "../../validation/cardValidation.js";
 
-const EditCardPage = () => {
+const CreateCard = () => {
   const [inputsValue, setInputsValue] = useState({
     title: "",
-    subTitle: "",
+    subtitle: "",
     description: "",
     phone: "",
     email: "",
@@ -39,45 +39,28 @@ const EditCardPage = () => {
     houseNumber: "",
   });
   const navigate = useNavigate();
+  const { login } = useContext(loginContext);
+  if (!login || !login.isBusiness) return;
 
-  let { id } = useParams(); //get id from url
-  const { login } = useContext(LoginContext);
-  /**
-   * useEffect {axios - get data from server} [id]
-   * save btn - axios - update data in server
-   */
-  useEffect(() => {
-    if (!id || !login) {
-      return;
-    }
-    axios
-      .get("/cards/" + id)
-      .then(({ data }) => {
-        if (data.user_id === login._id) {
-          setInputsValue(fromServer(data));
-        } else {
-          //not the same user
-          //navigate to home page
-          //toast
-          toast.warning("Cant Edit", {
-            position: "top-right",
-            autoClose: 3000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "dark",
-          });
-          navigate(ROUTES.HOME);
-        }
-      })
-      .catch((err) => {
-        console.log(err);
+  let keysArray = Object.keys(inputsValue);
+  const handleSubmit = async (e) => {
+    try {
+      await axios.post("/cards", normalizeCtreate(inputsValue));
+      toast.success("🦄 Create Card Done!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
       });
-  }, [id, login]);
-  let keysArray = Object.keys(inputsValue); //['title','subTitle', 'description', 'phone', 'email', 'web', 'url', 'alt','state', 'country', 'city','street', 'houseNumber', 'zip']
-
+      navigate(ROUTES.MYCARDS);
+    } catch (err) {
+      console.log("error from axios", err);
+    }
+  };
   const handleInputsChange = (e) => {
     setInputsValue((cInputsValue) => ({
       ...cInputsValue,
@@ -121,6 +104,9 @@ const EditCardPage = () => {
 
   return (
     <Box
+      component="form"
+      onSubmit={handleSubmit}
+      noValidate
       sx={{
         marginTop: 8,
         display: "flex",
@@ -157,9 +143,9 @@ const EditCardPage = () => {
         sx={{ mt: 3, mb: 2 }}
         disabled={Object.keys(errors).length > 0}
       >
-        Edit Card
+        Create Card
       </Button>
     </Box>
   );
 };
-export default EditCardPage;
+export default CreateCard;

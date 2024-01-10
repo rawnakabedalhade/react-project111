@@ -1,4 +1,4 @@
-const fromServer = (dataFromServer) => {
+const normalizeCtreate = (dataFromServer) => {
   return {
     title: dataFromServer.title,
     subtitle: dataFromServer.subtitle,
@@ -16,4 +16,4 @@ const fromServer = (dataFromServer) => {
     zip: dataFromServer.address.zip,
   };
 };
-export { fromServer };
+export { normalizeCtreate };

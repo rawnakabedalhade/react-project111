@@ -1,4 +1,5 @@
 import { Grid, TextField, Alert } from "@mui/material";
+import { required } from "joi";
 
 const TextInputComponent = ({
   xs,
@@ -9,19 +10,19 @@ const TextInputComponent = ({
   onChange,
   onBlur,
   errors,
+  required,
 }) => {
   return (
     <Grid item xs={xs}>
       <TextField
         name={id}
-        required
         fullWidth
         id={id}
         label={label}
-        autoFocus={autoFocus}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
+        required={required}
       />
       {errors && <Alert severity="error">{errors}</Alert>}
     </Grid>

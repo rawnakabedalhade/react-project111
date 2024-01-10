@@ -9,7 +9,7 @@ import AboutUsPage from "./../pages/AboutUsPage";
 import EditCardPage from "../pages/EditCard/EditCardPage";
 import AuthGuard from "../guard/AuthGuard";
 import ProfilePage from "../pages/ProfilePage";
-import CreateCardPage from "../pages/CreateCardPage";
+import CreateCardPage from "../pages/CreateCard/CreateCard";
 import BizGuard from "../guard/BizGuard";
 import FavCards from "../pages/FavCards";
 import MyCards from "../pages/MyCards";
@@ -21,7 +21,7 @@ const Router = () => {
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutUsPage />} />
-      <Route path={`${ROUTES.EDITCARD}/:id`} element={<EditCardPage />} />
+
       <Route path={ROUTES.FAVCARDS} element={<FavCards />} />
       <Route path={ROUTES.MYCARDS} element={<MyCards />} />
       <Route
@@ -37,6 +37,14 @@ const Router = () => {
         element={
           <BizGuard>
             <CreateCardPage />
+          </BizGuard>
+        }
+      />
+      <Route
+        path={`${ROUTES.EDITCARD}/:id`}
+        element={
+          <BizGuard>
+            <EditCardPage />
           </BizGuard>
         }
       />
