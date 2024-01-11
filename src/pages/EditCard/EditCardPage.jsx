@@ -13,7 +13,7 @@ import ROUTES from "../../routes/ROUTES.js";
 const EditCardPage = () => {
   const [inputsValue, setInputsValue] = useState({
     title: "",
-    subTitle: "",
+    subtitle: "",
     description: "",
     phone: "",
     email: "",
@@ -29,7 +29,7 @@ const EditCardPage = () => {
   });
   const [errors, setErrors] = useState({
     title: "",
-    subTitle: "",
+    subtitle: "",
     description: "",
     phone: "",
     email: "",
@@ -53,8 +53,9 @@ const EditCardPage = () => {
     axios
       .get("/cards/" + id)
       .then(({ data }) => {
-        if (data.user_id === login._id) {
+        if (data.user_id === login._id || login.isBusiness) {
           setInputsValue(fromServer(data));
+          setErrors({});
         } else {
           //not the same user
           //navigate to home page
@@ -76,6 +77,7 @@ const EditCardPage = () => {
         console.log(err);
       });
   }, [id, login]);
+
   let keysArray = Object.keys(inputsValue); //['title','subTitle', 'description', 'phone', 'email', 'web', 'url', 'alt','state', 'country', 'city','street', 'houseNumber', 'zip']
 
   const handleInputsChange = (e) => {
@@ -86,7 +88,7 @@ const EditCardPage = () => {
   };
 
   const handleInputsBlur = (e) => {
-    const { error } = validateSchema[e.target.id]({
+    let { error } = validateSchema[e.target.id]({
       [e.target.id]: inputsValue[e.target.id],
     });
     console.log({ error });

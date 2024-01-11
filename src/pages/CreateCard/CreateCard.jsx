@@ -29,7 +29,7 @@ const CreateCard = () => {
   });
   const [errors, setErrors] = useState({
     title: "",
-    subTitle: "",
+    subtitle: "",
     description: "",
     phone: "",
     email: "",
@@ -43,7 +43,8 @@ const CreateCard = () => {
   if (!login || !login.isBusiness) return;
 
   let keysArray = Object.keys(inputsValue);
-  const handleSubmit = async (e) => {
+  const handleSubmit = async () => {
+    console.log("from submit");
     try {
       await axios.post("/cards", normalizeCtreate(inputsValue));
       toast.success("🦄 Create Card Done!", {
@@ -72,7 +73,7 @@ const CreateCard = () => {
     const { error } = validateSchema[e.target.id]({
       [e.target.id]: inputsValue[e.target.id],
     });
-    console.log({ error });
+    console.log(Object.keys(errors).length);
     if (error) {
       setErrors((cErrors) => ({
         ...cErrors,
@@ -104,9 +105,6 @@ const CreateCard = () => {
 
   return (
     <Box
-      component="form"
-      onSubmit={handleSubmit}
-      noValidate
       sx={{
         marginTop: 8,
         display: "flex",
@@ -118,9 +116,9 @@ const CreateCard = () => {
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
-        Edit your card
+        Create Your Card
       </Typography>
-      <Box component="form" noValidate sx={{ mt: 3 }}>
+      <Box component="form" noValidate sx={{ mt: 3 }} onSubmit={handleSubmit}>
         <Grid container spacing={2}>
           {keysArray.map((keyName) => (
             <TextInputComponent

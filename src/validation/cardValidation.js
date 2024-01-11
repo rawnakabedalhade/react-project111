@@ -1,5 +1,4 @@
 import Joi from "joi";
-import { validateEmail } from "./loginValidation";
 
 const titleSchema = Joi.object({
   title: Joi.string().min(2).max(256).required(),
