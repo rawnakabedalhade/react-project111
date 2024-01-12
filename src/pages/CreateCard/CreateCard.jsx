@@ -43,10 +43,14 @@ const CreateCard = () => {
   if (!login || !login.isBusiness) return;
 
   let keysArray = Object.keys(inputsValue);
-  const handleSubmit = async () => {
+  const handleSubmit = async (e) => {
+    e.preventDefault();
     console.log("from submit");
     try {
-      await axios.post("/cards", normalizeCtreate(inputsValue));
+      let { data } = await axios.post("/cards", normalizeCtreate(inputsValue));
+      console.log(data);
+      // localStorage.setItem("token", data);
+      // const decoded = jwtDecode(data);
       toast.success("🦄 Create Card Done!", {
         position: "top-right",
         autoClose: 5000,
@@ -89,7 +93,7 @@ const CreateCard = () => {
   const isrequired = (fieldName) => {
     if (
       fieldName === "title" ||
-      fieldName === "subTitle" ||
+      fieldName === "subtitle" ||
       fieldName === "description" ||
       fieldName === "phone" ||
       fieldName === "email" ||
@@ -133,16 +137,16 @@ const CreateCard = () => {
             />
           ))}
         </Grid>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 3, mb: 2 }}
+          disabled={Object.keys(errors).length > 0}
+        >
+          Create Card
+        </Button>
       </Box>
-      <Button
-        type="submit"
-        fullWidth
-        variant="contained"
-        sx={{ mt: 3, mb: 2 }}
-        disabled={Object.keys(errors).length > 0}
-      >
-        Create Card
-      </Button>
     </Box>
   );
 };

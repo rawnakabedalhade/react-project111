@@ -1,15 +1,16 @@
-import Grid from "@mui/material/Grid";
 // import CardComponent from "../../components/CardComponent";
 import CardComponent from "../../Components/CardComponent";
-import Typography from "@mui/material/Typography";
+import { Typography, Button, Grid } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
 import cardContext from "../../store/cardContext";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const HomePage = () => {
   let { setDataFromServer, dataFromServer } = useContext(cardContext);
+  let [count, setCount] = useState(4);
 
   const navigate = useNavigate();
   useEffect(() => {
@@ -26,6 +27,7 @@ const HomePage = () => {
   if (!dataFromServer || !dataFromServer.length) {
     return <Typography>Could not find any items</Typography>;
   }
+
   const handleDeleteCard = (id) => {
     console.log("father: card to delete", id);
     setDataFromServer((currentDataFromServer) =>
@@ -43,27 +45,46 @@ const HomePage = () => {
   const handleFavoriteCard = (id) => {
     console.log("father:Favorite Card", id);
   };
+  const handleShowMore = () => {
+    setCount((c) => (c += 4));
+    // setDataFromServer((cData) => cData + 4);
+  };
 
   return (
-    <Grid container spacing={2}>
-      {dataFromServer.map((item, index) => (
-        <Grid item lg={3} md={6} xs={12} key={"cards" + index}>
-          <CardComponent
-            id={item._id}
-            title={item.title}
-            subtitle={item.subtitle}
-            img={item.image.url}
-            phone={item.phone}
-            address={item.address}
-            cardNumber={item.bizNumber}
-            onDelete={handleDeleteCard}
-            onEdit={handleEditeCard}
-            onPhone={handlePhoneCard}
-            onFavorite={handleFavoriteCard}
-          />
-        </Grid>
-      ))}
-    </Grid>
+    <>
+      <Grid container spacing={2}>
+        {dataFromServer.slice(0, count).map((item, index) => (
+          <Grid item lg={3} md={6} xs={12} key={"cards" + index}>
+            <CardComponent
+              id={item._id}
+              title={item.title}
+              subtitle={item.subtitle}
+              img={item.image.url}
+              phone={item.phone}
+              address={item.address}
+              cardNumber={item.bizNumber}
+              onDelete={handleDeleteCard}
+              onEdit={handleEditeCard}
+              onPhone={handlePhoneCard}
+              onFavorite={handleFavoriteCard}
+            />
+          </Grid>
+        ))}
+      </Grid>
+      <div style={{ textAlign: "center" }}>
+        {count < dataFromServer.length && (
+          <Button
+            variant="contained"
+            endIcon={<ExpandMoreIcon />}
+            onClick={handleShowMore}
+            color="secondary"
+            sx={{ mt: 2 }}
+          >
+            Show More Cards
+          </Button>
+        )}
+      </div>
+    </>
   );
 };
 

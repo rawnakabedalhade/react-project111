@@ -17,6 +17,7 @@ const TextInputComponent = ({
         name={id}
         fullWidth
         id={id}
+        type={label === "password" ? "password" : ""}
         label={label}
         value={value}
         onChange={onChange}
