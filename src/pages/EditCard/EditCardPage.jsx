@@ -10,6 +10,7 @@ import { fromServer } from "./normalizeEdit";
 import { toast } from "react-toastify";
 import ROUTES from "../../routes/ROUTES.js";
 import CardComponent from "../../Components/CardComponent.jsx";
+import ToServer from "./ToServer.js";
 
 const EditCardPage = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -50,9 +51,9 @@ const EditCardPage = () => {
     axios
       .get("/cards/" + id)
       .then(({ data }) => {
+        console.log("data", data);
         if (data.user_id === login._id || login.isBusiness) {
           setInputsValue(fromServer(data));
-          console.log(inputsValue);
           setErrors({});
         } else {
           //not the same user
@@ -75,7 +76,6 @@ const EditCardPage = () => {
   }, [id, login]);
 
   let keysArray = Object.keys(inputsValue); //['title','subTitle', 'description', 'phone', 'email', 'web', 'url', 'alt','state', 'country', 'city','street', 'houseNumber', 'zip']
-  console.log(keysArray);
 
   const handleInputsChange = (e) => {
     setInputsValue((cInputsValue) => ({
@@ -117,12 +117,13 @@ const EditCardPage = () => {
     }
     return false;
   };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(1);
     try {
-      let { data } = await axios.put(`/cards/${id}`, fromServer(inputsValue));
-      console.log(data);
+      let { data } = await axios.put(`/cards/${id}`, ToServer(inputsValue));
+      console.log("data2" + data);
       navigate(ROUTES.HOME);
     } catch (error) {
       console.log("error from update", error);

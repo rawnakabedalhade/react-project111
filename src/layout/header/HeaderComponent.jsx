@@ -18,16 +18,6 @@ import MoreIcon from "@mui/icons-material/MoreVert";
 import { Switch } from "@mui/material";
 import { toast } from "react-toastify";
 
-// import { Link } from "react-router-dom";
-// import ROUTES from "../../routes/ROUTES";
-// import NavLinkComponent from "./NavLinkComponent";
-// import nextKey from "generate-my-key";
-// import myLinks, {
-//   alwaysLinks,
-//   loggedInLinks,
-//   loggedOutLinks,
-// } from "../myLinks";
-
 import Links from "./ui/Links";
 import LeftDrawerComponent from "./ui/LeftDrawerComponent";
 import { useState, useContext } from "react";
@@ -74,8 +64,8 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
     setIsOpen(false);
   };
   const handleLogout = () => {
-    setLogin(false);
-    toast.success("🦄 LoggedIn Successfully", {
+    setLogin(null);
+    toast.success("🦄 LoggedOut Successfully", {
       position: "top-right",
       autoClose: 5000,
       hideProgressBar: false,

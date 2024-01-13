@@ -13,6 +13,7 @@ import CreateCardPage from "../pages/CreateCard/CreateCard";
 import BizGuard from "../guard/BizGuard";
 import FavCards from "../pages/FavCards";
 import MyCards from "../pages/MyCards";
+import CardDetails from "../pages/CardDetails/CardDetails";
 
 const Router = () => {
   return (
@@ -21,9 +22,9 @@ const Router = () => {
       <Route path={ROUTES.LOGIN} element={<LoginPage />} />
       <Route path={ROUTES.REGISTER} element={<RegisterPage />} />
       <Route path={ROUTES.ABOUT} element={<AboutUsPage />} />
-
       <Route path={ROUTES.FAVCARDS} element={<FavCards />} />
       <Route path={ROUTES.MYCARDS} element={<MyCards />} />
+      <Route path={`${ROUTES.CARDETAILS}/:id`} element={<CardDetails />} />
       <Route
         path={ROUTES.PROFILE}
         element={

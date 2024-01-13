@@ -1,11 +1,14 @@
 import axios from "axios";
 import { jwtDecode } from "jwt-decode";
 import { useContext, useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginContext from "../store/loginContext";
+import ROUTES from "../routes/ROUTES";
 
 const useAutoLogin = () => {
   const { setLogin } = useContext(LoginContext);
   const [finishAutoLogin, setFinishAutoLogin] = useState(false);
+  const navigate = useNavigate();
   useEffect(() => {
     let token = localStorage.getItem("token");
     if (!token) {

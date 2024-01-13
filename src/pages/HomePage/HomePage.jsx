@@ -3,16 +3,12 @@ import CardComponent from "../../Components/CardComponent";
 import { Typography, Button, Grid } from "@mui/material";
 import { useState, useEffect, useContext } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import ROUTES from "../../routes/ROUTES";
 import cardContext from "../../store/cardContext";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 const HomePage = () => {
   let { setDataFromServer, dataFromServer } = useContext(cardContext);
   let [count, setCount] = useState(4);
-
-  const navigate = useNavigate();
   useEffect(() => {
     axios
       .get("/cards")
@@ -37,7 +33,6 @@ const HomePage = () => {
   };
   const handleEditeCard = (id) => {
     console.log("father:card to Create", id);
-    navigate(`${ROUTES.EDITCARD}/${id}`);
   };
   const handlePhoneCard = (phone) => {
     console.log("father:Phone Card", phone);

@@ -19,9 +19,12 @@ import loginContext from "../store/loginContext";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
 
-const CardComponent = ({
+const DetailsCardComponent = ({
   title,
   subtitle,
+  description,
+  email,
+  web,
   img,
   phone,
   address,
@@ -50,19 +53,28 @@ const CardComponent = ({
     onFavorite(id);
   };
   return (
-    <Card square raised>
+    <Card square raised sx={{ width: 300, margin: "auto" }}>
       <CardActionArea>
-        <CardMedia
-          component="img"
-          height={200}
-          image={img}
-          alt="image"
-          onClick={() => navigate(`${ROUTES.CARDETAILS}/${id}`)}
-        />
+        <CardMedia component="img" height={200} image={img} alt="image" />
       </CardActionArea>
       <CardHeader title={title} subheader={subtitle}></CardHeader>
       <Divider></Divider>
       <CardContent>
+        <Typography component="span" fontWeight={700}>
+          {description}
+        </Typography>
+        <Typography>
+          <Typography component="span" fontWeight={700}>
+            Website:
+          </Typography>
+          {web}
+        </Typography>
+        <Typography>
+          <Typography component="span" fontWeight={700}>
+            Email:
+          </Typography>
+          {email}
+        </Typography>
         <Typography>
           <Typography component="span" fontWeight={700}>
             Phone:
@@ -73,7 +85,8 @@ const CardComponent = ({
           <Typography component="span" fontWeight={700}>
             Address:
           </Typography>
-          {address.city},{address.street},{address.houseNumber}
+          {address.state},{address.country},{address.city},{address.street},
+          {address.houseNumber}
         </Typography>
         <Typography>
           <Typography component="span" fontWeight={700}>
@@ -90,11 +103,12 @@ const CardComponent = ({
             )}
 
             {/* Edit only for my own cards */}
-            {login && login.isAdmin && (
-              <IconButton onClick={handleEditeClick}>
-                <ModeIcon />
-              </IconButton>
-            )}
+            {(login && login.isAdmin) ||
+              (login.isBusiness && (
+                <IconButton onClick={handleEditeClick}>
+                  <ModeIcon />
+                </IconButton>
+              ))}
           </Box>
           <Box>
             <IconButton onClick={handlePhoneClick}>
@@ -111,10 +125,11 @@ const CardComponent = ({
     </Card>
   );
 };
-CardComponent.propTypes = {
+DetailsCardComponent.propTypes = {
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string,
-  img: PropTypes.string,
+  subtitle: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired,
+  img: PropTypes.string.isRequired,
   phone: PropTypes.string.isRequired,
   address: PropTypes.shape({
     city: PropTypes.string.isRequired,
@@ -124,8 +139,8 @@ CardComponent.propTypes = {
   cardNumber: PropTypes.number.isRequired,
 };
 
-CardComponent.defaultProps = {
+DetailsCardComponent.defaultProps = {
   // img: "/assets/imgs/car 1.jpg",
   subtitle: "subtitle default",
 };
-export default CardComponent;
+export default DetailsCardComponent;

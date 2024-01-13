@@ -3,7 +3,7 @@ import Joi from "joi";
 const titleSchema = Joi.object({
   title: Joi.string().min(2).max(256).required(),
 });
-const subTitleSchema = Joi.object({
+const subtitleSchema = Joi.object({
   subtitle: Joi.string().min(2).max(256).required(),
 });
 const emailSchema = Joi.object({
@@ -44,7 +44,7 @@ const zipSchema = Joi.object({
 });
 
 const validateTitleSchema = (title) => titleSchema.validate(title);
-const validateSubTitleSchema = (subTitle) => subTitleSchema.validate(subTitle);
+const validateSubtitleSchema = (subtitle) => subtitleSchema.validate(subtitle);
 const validateEmailSchema = (email) => emailSchema.validate(email);
 const validateDescription = (description) =>
   descriptionSchema.validate(description);
@@ -62,7 +62,7 @@ const validateZip = (zip) => zipSchema.validate(zip);
 
 const validateSchema = {
   title: validateTitleSchema,
-  subtitle: validateSubTitleSchema,
+  subtitle: validateSubtitleSchema,
   description: validateDescription,
   phone: validatePhone,
   email: validateEmailSchema,
