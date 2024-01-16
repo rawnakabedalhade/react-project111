@@ -29,6 +29,7 @@ const LoginPage = () => {
   const [passwordValue, setPasswordValue] = useState("");
   const [emailError, setEmailError] = useState("");
   const [passwordError, setPasswordError] = useState("");
+  const [checked, setChecked] = useState(false);
   const { setLogin } = useContext(loginContext);
   const navigate = useNavigate();
 
@@ -45,7 +46,12 @@ const LoginPage = () => {
         email: emailValue,
         password: passwordValue,
       });
-      localStorage.setItem("token", data);
+      if (checked) {
+        localStorage.setItem("token", data);
+      } else {
+        sessionStorage.setItem("token", data);
+        console.log(1);
+      }
       const decoded = jwtDecode(data);
       setLogin(decoded);
       toast.success("🦄 LoggedIn Successfully", {
@@ -81,6 +87,9 @@ const LoginPage = () => {
     } else {
       setPasswordError("");
     }
+  };
+  const handleCheckboxChange = (e) => {
+    setChecked(!checked);
   };
   return (
     <Grid container component="main" sx={{ height: "100vh" }}>
@@ -154,6 +163,8 @@ const LoginPage = () => {
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
               label="Remember me"
+              onChange={handleCheckboxChange}
+              checked={!checked}
             />
             <Button
               type="submit"
