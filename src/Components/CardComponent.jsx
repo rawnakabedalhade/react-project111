@@ -14,9 +14,9 @@ import ModeIcon from "@mui/icons-material/Mode";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import PropTypes from "prop-types";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import loginContext from "../store/loginContext";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
 
 const CardComponent = ({
@@ -32,8 +32,11 @@ const CardComponent = ({
   onPhone,
   onFavorite,
 }) => {
+  let [isLiked, setIsLiked] = useState("#757575");
   let { login } = useContext(loginContext);
   const navigate = useNavigate();
+  let location = useLocation();
+
   const handleDeleteClick = () => {
     console.log("delete " + id);
     onDelete(id);
@@ -47,6 +50,10 @@ const CardComponent = ({
     onPhone(phone);
   };
   const handleFavoriteClick = () => {
+    if (isLiked == "#757575") {
+      setIsLiked("red");
+    } else setIsLiked("#757575");
+
     onFavorite(id);
   };
   return (
@@ -83,14 +90,16 @@ const CardComponent = ({
         </Typography>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
           <Box>
-            {login && login.isAdmin && (
+            {((login && login.isAdmin) ||
+              location.pathname === ROUTES.MYCARDS) && (
               <IconButton onClick={handleDeleteClick}>
                 <DeleteIcon />
               </IconButton>
             )}
 
             {/* Edit only for my own cards */}
-            {login && login.isAdmin && (
+            {((login && login.isAdmin) ||
+              location.pathname === ROUTES.MYCARDS) && (
               <IconButton onClick={handleEditeClick}>
                 <ModeIcon />
               </IconButton>
@@ -102,7 +111,7 @@ const CardComponent = ({
             </IconButton>
             {login && (
               <IconButton onClick={handleFavoriteClick}>
-                <FavoriteIcon />
+                <FavoriteIcon sx={{ color: isLiked }} />
               </IconButton>
             )}
           </Box>

@@ -9,6 +9,7 @@ import { normalizeCtreate } from "./normalizeCreate.js";
 import { toast } from "react-toastify";
 import loginContext from "../../store/loginContext.js";
 import validateSchema from "../../validation/cardValidation.js";
+import CardComponent from "../../Components/CardComponent.jsx";
 
 const CreateCard = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -47,10 +48,7 @@ const CreateCard = () => {
     e.preventDefault();
     console.log("from submit");
     try {
-      let { data } = await axios.post("/cards", normalizeCtreate(inputsValue));
-      console.log(data);
-      // localStorage.setItem("token", data);
-      // const decoded = jwtDecode(data);
+      await axios.post("/cards", normalizeCtreate(inputsValue));
       toast.success("🦄 Create Card Done!", {
         position: "top-right",
         autoClose: 5000,
@@ -72,7 +70,6 @@ const CreateCard = () => {
       [e.target.id]: e.target.value,
     }));
   };
-
   const handleInputsBlur = (e) => {
     const { error } = validateSchema[e.target.id]({
       [e.target.id]: inputsValue[e.target.id],

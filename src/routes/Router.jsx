@@ -11,7 +11,7 @@ import AuthGuard from "../guard/AuthGuard";
 import ProfilePage from "../pages/ProfilePage";
 import CreateCardPage from "../pages/CreateCard/CreateCard";
 import BizGuard from "../guard/BizGuard";
-import FavCards from "../pages/FavCards";
+import FavCards from "../pages/FavCards/FavCards";
 import MyCards from "../pages/MyCards";
 import CardDetails from "../pages/CardDetails/CardDetails";
 

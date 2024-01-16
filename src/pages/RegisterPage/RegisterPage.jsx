@@ -18,6 +18,7 @@ import { validateSchema } from "../../validation/registerValidation";
 import TextInputComponent from "../../Components/TextInputComponent";
 
 const RegisterPage = () => {
+  const [btn, setbtn] = useState(true);
   const [errors, setErrors] = useState({
     first: "",
     last: "",
@@ -55,6 +56,7 @@ const RegisterPage = () => {
     }));
   };
   const handleSubmit = async (e) => {
+    e.preventDefault();
     try {
       await axios.post("/users", normalizeRegister(inputsValue, checked));
       toast.success("🦄 Registered Successfully!", {
@@ -86,6 +88,7 @@ const RegisterPage = () => {
     } else {
       setErrors((copyOfErrors) => {
         delete copyOfErrors[e.target.id];
+        setbtn(false);
         return { ...copyOfErrors };
       });
     }
@@ -155,7 +158,7 @@ const RegisterPage = () => {
           fullWidth
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
-          disabled={Object.keys(errors).length > 0}
+          disabled={btn}
         >
           Sign Up
         </Button>

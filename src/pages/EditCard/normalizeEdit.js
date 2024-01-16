@@ -17,27 +17,3 @@ const fromServer = (dataFromServer) => {
   };
 };
 export { fromServer };
-
-// const fromServer = (dataFromServer) => {
-//   return {
-//     title: dataFromServer.title,
-//     subtitle: dataFromServer.subtitle,
-//     description: dataFromServer.description,
-//     phone: dataFromServer.phone,
-//     email: dataFromServer.email,
-//     web: dataFromServer.web,
-//     image: {
-//       url: dataFromServer.url,
-//       alt: dataFromServer.alt,
-//     },
-//     address: {
-//       state: dataFromServer.state,
-//       country: dataFromServer.country,
-//       city: dataFromServer.city,
-//       street: dataFromServer.street,
-//       houseNumber: dataFromServer.houseNumber,
-//       zip: dataFromServer.zip,
-//     },
-//   };
-// };
-// export { fromServer };

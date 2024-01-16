@@ -5,9 +5,11 @@ import { useState, useEffect, useContext } from "react";
 import axios from "axios";
 import cardContext from "../../store/cardContext";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import FavCardContext from "../../store/FavCardContext";
 
 const HomePage = () => {
   let { setDataFromServer, dataFromServer } = useContext(cardContext);
+  let { setFavCard, Favcard } = useContext(FavCardContext);
   let [count, setCount] = useState(4);
   useEffect(() => {
     axios
@@ -37,8 +39,17 @@ const HomePage = () => {
   const handlePhoneCard = (phone) => {
     console.log("father:Phone Card", phone);
   };
-  const handleFavoriteCard = (id) => {
+  const handleFavoriteCard = async (id) => {
     console.log("father:Favorite Card", id);
+    let Favcard = dataFromServer.filter((card) => card._id === id);
+    try {
+      let { data } = await axios.patch(`/cards/${id}`, Favcard);
+      console.log(data.likes + "liked");
+      setFavCard(Favcard);
+      console.log(Favcard);
+    } catch (err) {
+      console.log(err);
+    }
   };
   const handleShowMore = () => {
     setCount((c) => (c += 4));

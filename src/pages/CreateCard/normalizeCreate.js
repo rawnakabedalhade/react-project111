@@ -1,19 +1,23 @@
-const normalizeCtreate = (dataFromServer) => {
+const normalizeCtreate = (newData) => {
   return {
-    title: dataFromServer.title,
-    subtitle: dataFromServer.subtitle,
-    description: dataFromServer.description,
-    phone: dataFromServer.phone,
-    email: dataFromServer.email,
-    web: dataFromServer.web,
-    url: dataFromServer.image.url,
-    alt: dataFromServer.image.alt,
-    state: dataFromServer.address.state,
-    country: dataFromServer.address.country,
-    city: dataFromServer.address.city,
-    street: dataFromServer.address.street,
-    houseNumber: dataFromServer.address.houseNumber,
-    zip: dataFromServer.address.zip,
+    title: newData.title,
+    subtitle: newData.subtitle,
+    description: newData.description,
+    phone: newData.phone,
+    email: newData.email,
+    web: newData.web,
+    image: {
+      url: newData.url,
+      alt: newData.alt,
+    },
+    address: {
+      state: newData.state,
+      country: newData.country,
+      city: newData.city,
+      street: newData.street,
+      houseNumber: newData.houseNumber,
+      zip: newData.zip,
+    },
   };
 };
 export { normalizeCtreate };
