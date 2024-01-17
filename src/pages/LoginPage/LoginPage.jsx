@@ -88,7 +88,7 @@ const LoginPage = () => {
       setPasswordError("");
     }
   };
-  const handleCheckboxChange = (e) => {
+  const handleCheckboxChange = () => {
     setChecked(!checked);
   };
   return (

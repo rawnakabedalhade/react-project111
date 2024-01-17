@@ -8,19 +8,18 @@ import { Typography } from "@mui/material";
 import cardContext from "../../../store/cardContext";
 
 const FilterComponent = () => {
-  const [txt, setTxt] = useState("");
-  let { dataFromServer, setDataFromServer } = useContext(cardContext);
-
+  let { setDataFromServer, copyCards } = useContext(cardContext);
   const handleInputChange = (e) => {
     const inputValue = e.target.value;
-    setTxt(inputValue);
-
-    const filteredCards = dataFromServer.filter((card) => {
+    if (!inputValue || inputValue.length < 1) {
+      setDataFromServer(copyCards);
+      return;
+    }
+    const cardsSearch = copyCards.filter((card) => {
       return card.title.includes(inputValue);
     });
 
-    // Update the state with the filtered cards
-    setDataFromServer(filteredCards);
+    setDataFromServer(cardsSearch);
   };
 
   return (
@@ -31,7 +30,6 @@ const FilterComponent = () => {
       <StyledInputBase
         placeholder="Search…"
         inputProps={{ "aria-label": "search" }}
-        value={txt}
         onChange={handleInputChange}
       />
     </Search>

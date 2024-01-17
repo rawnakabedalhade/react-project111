@@ -9,10 +9,13 @@ import FavCardContext from "./store/FavCardContext";
 function App() {
   const [login, setLogin] = useState(null);
   const [dataFromServer, setDataFromServer] = useState([]);
+  const [copyCards, setCopyCards] = useState([]);
   const [FavCard, setFavCard] = useState([]);
 
   return (
-    <cardContext.Provider value={{ dataFromServer, setDataFromServer }}>
+    <cardContext.Provider
+      value={{ dataFromServer, setDataFromServer, copyCards, setCopyCards }}
+    >
       <FavCardContext.Provider value={{ FavCard, setFavCard }}>
         <loginContext.Provider value={{ login, setLogin }}>
           <ToastContainer />

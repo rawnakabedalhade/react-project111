@@ -18,6 +18,7 @@ import { useContext, useState } from "react";
 import loginContext from "../store/loginContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
+import cardContext from "../store/cardContext";
 
 const CardComponent = ({
   title,
@@ -34,6 +35,7 @@ const CardComponent = ({
 }) => {
   let [isLiked, setIsLiked] = useState("#757575");
   let { login } = useContext(loginContext);
+  let { dataFromServer } = useContext(cardContext);
   const navigate = useNavigate();
   let location = useLocation();
 

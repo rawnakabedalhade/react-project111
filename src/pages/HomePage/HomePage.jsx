@@ -6,10 +6,16 @@ import axios from "axios";
 import cardContext from "../../store/cardContext";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FavCardContext from "../../store/FavCardContext";
+import useFavoriteCard from "../../hooks/useFavoriteCard";
+import loginContext from "../../store/loginContext";
 
 const HomePage = () => {
-  let { setDataFromServer, dataFromServer } = useContext(cardContext);
-  let { setFavCard, Favcard } = useContext(FavCardContext);
+  let { setDataFromServer, dataFromServer, setCopyCards } =
+    useContext(cardContext);
+  let { login } = useContext(loginContext);
+  console.log(login);
+  // let { setFavCard, Favcard } = useContext(FavCardContext);
+  // let Favcard = useFavoriteCard();
   let [count, setCount] = useState(4);
   useEffect(() => {
     axios
@@ -17,6 +23,7 @@ const HomePage = () => {
       .then(({ data }) => {
         console.log(data);
         setDataFromServer(data);
+        setCopyCards(data);
       })
       .catch((err) => {
         console.log("error from axios", err);
@@ -31,7 +38,6 @@ const HomePage = () => {
     setDataFromServer((currentDataFromServer) =>
       currentDataFromServer.filter((card) => card._id !== id)
     );
-    console.log({ dataFromServer });
   };
   const handleEditeCard = (id) => {
     console.log("father:card to Create", id);
@@ -45,15 +51,14 @@ const HomePage = () => {
     try {
       let { data } = await axios.patch(`/cards/${id}`, Favcard);
       console.log(data.likes + "liked");
-      setFavCard(Favcard);
-      console.log(Favcard);
+      // setFavCard(Favcard);
+      // console.log(Favcard);
     } catch (err) {
       console.log(err);
     }
   };
   const handleShowMore = () => {
     setCount((c) => (c += 4));
-    // setDataFromServer((cData) => cData + 4);
   };
 
   return (

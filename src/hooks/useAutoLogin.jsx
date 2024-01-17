@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import LoginContext from "../store/loginContext";
 import ROUTES from "../routes/ROUTES";
 
-const useAutoLogin = () => {
+const useAutoLogin = (id) => {
   const { setLogin } = useContext(LoginContext);
   const [finishAutoLogin, setFinishAutoLogin] = useState(false);
   const navigate = useNavigate();
