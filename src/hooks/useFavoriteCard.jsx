@@ -16,6 +16,5 @@ const useFavoriteCard = () => {
       .then(({ data }) => setFavCard(data))
       .catch((err) => console.log(err));
   });
-  return Favcard;
 };
 export default useFavoriteCard;

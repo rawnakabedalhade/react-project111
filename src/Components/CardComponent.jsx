@@ -28,12 +28,12 @@ const CardComponent = ({
   address,
   cardNumber,
   id,
+  liked,
   onDelete,
   onEdit,
   onPhone,
   onFavorite,
 }) => {
-  let [isLiked, setIsLiked] = useState("#757575");
   let { login } = useContext(loginContext);
   let { dataFromServer } = useContext(cardContext);
   const navigate = useNavigate();
@@ -52,10 +52,6 @@ const CardComponent = ({
     onPhone(phone);
   };
   const handleFavoriteClick = () => {
-    if (isLiked == "#757575") {
-      setIsLiked("red");
-    } else setIsLiked("#757575");
-
     onFavorite(id);
   };
   return (
@@ -113,7 +109,7 @@ const CardComponent = ({
             </IconButton>
             {login && (
               <IconButton onClick={handleFavoriteClick}>
-                <FavoriteIcon sx={{ color: isLiked }} />
+                <FavoriteIcon color={liked ? "error" : "inherit"} />
               </IconButton>
             )}
           </Box>
