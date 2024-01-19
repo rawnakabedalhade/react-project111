@@ -9,11 +9,14 @@ import FavCardContext from "../../store/FavCardContext";
 import useFavoriteCard from "../../hooks/useFavoriteCard";
 import loginContext from "../../store/loginContext";
 import normalizeHome from "./normalizeHome";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/ROUTES";
 const HomePage = () => {
   let { setDataFromServer, dataFromServer, setCopyCards } =
     useContext(cardContext);
   let { login } = useContext(loginContext);
   let [count, setCount] = useState(4);
+  let navigate = useNavigate();
   useEffect(() => {
     axios
       .get("/cards")
@@ -35,14 +38,24 @@ const HomePage = () => {
     return <Typography>Could not find any items</Typography>;
   }
 
-  const handleDeleteCard = (id) => {
-    console.log("father: card to delete", id);
-    setDataFromServer((currentDataFromServer) =>
-      currentDataFromServer.filter((card) => card._id !== id)
-    );
+  const handleDeleteCard = async (id) => {
+    console.log("delete card", id);
+    axios
+      .delete("/cards/" + id)
+      .then(({ data }) => {
+        console.log("data", data);
+        console.log("data from axios (delete)", data);
+        setDataFromServer((cDataFromServer) => {
+          return cDataFromServer.filter((card) => card._id !== id);
+        });
+        //update cards from server
+      })
+      .catch((err) => {
+        console.log("error from axios (delete)", err);
+      });
   };
   const handleEditeCard = (id) => {
-    console.log("father:card to Create", id);
+    navigate(`${ROUTES.EDITCARD}/${id}`);
   };
   const handlePhoneCard = (phone) => {
     console.log("father:Phone Card", phone);

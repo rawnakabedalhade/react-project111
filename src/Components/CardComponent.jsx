@@ -45,7 +45,6 @@ const CardComponent = ({
   };
   const handleEditeClick = () => {
     console.log("create " + id);
-    navigate(`${ROUTES.EDITCARD}/${id}`);
     onEdit(id);
   };
   const handlePhoneClick = () => {
@@ -96,8 +95,7 @@ const CardComponent = ({
             )}
 
             {/* Edit only for my own cards */}
-            {((login && login.isAdmin) ||
-              location.pathname === ROUTES.MYCARDS) && (
+            {login && location.pathname === ROUTES.MYCARDS && (
               <IconButton onClick={handleEditeClick}>
                 <ModeIcon />
               </IconButton>
