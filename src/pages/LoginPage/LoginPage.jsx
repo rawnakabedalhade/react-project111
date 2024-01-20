@@ -1,6 +1,5 @@
 import { useCallback, useContext, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-/* mui hooks */
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -10,19 +9,21 @@ import Checkbox from "@mui/material/Checkbox";
 import Paper from "@mui/material/Paper";
 import Box from "@mui/material/Box";
 import Grid from "@mui/material/Grid";
-import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
+import LockIcon from "@mui/icons-material/Lock";
 import Alert from "@mui/material/Alert";
 import Typography from "@mui/material/Typography";
-import ButtonsComponent from "../../Components/ButtonsComponent";
 import ROUTES from "../../routes/ROUTES";
 import axios from "axios";
 import loginContext from "../../store/loginContext";
 import { jwtDecode } from "jwt-decode";
 import { toast } from "react-toastify";
+import "../../style/login.css";
 import {
   validateEmail,
   validatePassword,
 } from "../../validation/loginValidation";
+import AlternateEmailIcon from "@mui/icons-material/AlternateEmail";
+import HttpsIcon from "@mui/icons-material/Https";
 
 const LoginPage = () => {
   const [emailValue, setEmailValue] = useState("");
@@ -120,8 +121,8 @@ const LoginPage = () => {
             alignItems: "center",
           }}
         >
-          <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
-            <LockOutlinedIcon />
+          <Avatar sx={{ m: 1, bgcolor: "black" }}>
+            <LockIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
             Sign in
@@ -131,6 +132,7 @@ const LoginPage = () => {
             onSubmit={handleSubmit}
             noValidate
             sx={{ mt: 1 }}
+            className="form"
           >
             <TextField
               margin="normal"
@@ -144,6 +146,12 @@ const LoginPage = () => {
               value={emailValue}
               onChange={handleEmailChange}
               onBlur={handleEmailBlur}
+              className="input"
+              InputProps={{
+                startAdornment: (
+                  <AlternateEmailIcon style={{ marginRight: "8px" }} />
+                ),
+              }}
             />
             {emailError && <Alert severity="error">{emailError}</Alert>}
             <TextField
@@ -158,6 +166,10 @@ const LoginPage = () => {
               value={passwordValue}
               onChange={handlePasswordChange}
               onBlur={handlePasswordBlur}
+              className="input"
+              InputProps={{
+                startAdornment: <HttpsIcon style={{ marginRight: "8px" }} />,
+              }}
             />
             {passwordError && <Alert severity="error">{passwordError}</Alert>}
             <FormControlLabel
@@ -172,17 +184,18 @@ const LoginPage = () => {
               variant="contained"
               sx={{ mt: 3, mb: 2 }}
               disabled={emailError || passwordError}
+              className="button-submit"
             >
               Sign In
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2">
+                <Link href="#" variant="body2" className="span">
                   Forgot password?
                 </Link>
               </Grid>
               <Grid item>
-                <Link to={ROUTES.REGISTER}>
+                <Link to={ROUTES.REGISTER} className="span">
                   {"Don't have an account? Sign Up"}
                 </Link>
               </Grid>

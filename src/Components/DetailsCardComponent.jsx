@@ -30,6 +30,7 @@ const DetailsCardComponent = ({
   address,
   cardNumber,
   id,
+  liked,
   onDelete,
   onEdit,
   onPhone,
@@ -38,11 +39,9 @@ const DetailsCardComponent = ({
   let { login } = useContext(loginContext);
   const navigate = useNavigate();
   const handleDeleteClick = () => {
-    console.log("delete " + id);
     onDelete(id);
   };
   const handleEditeClick = () => {
-    console.log("create " + id);
     navigate(`${ROUTES.EDITCARD}/${id}`);
     onEdit(id);
   };
@@ -53,76 +52,98 @@ const DetailsCardComponent = ({
     onFavorite(id);
   };
   return (
-    <Card square raised sx={{ width: 300, margin: "auto" }}>
-      <CardActionArea>
-        <CardMedia component="img" height={200} image={img} alt="image" />
-      </CardActionArea>
-      <CardHeader title={title} subheader={subtitle}></CardHeader>
-      <Divider></Divider>
-      <CardContent>
-        <Typography component="span" fontWeight={700}>
-          {description}
-        </Typography>
-        <Typography>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "row",
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Box sx={{ width: "70%" }}>
+        <iframe
+          width="100%"
+          height="600"
+          frameborder="0"
+          scrolling="no"
+          marginheight="0"
+          marginwidth="0"
+          src={`https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20${address.street}%20Street,%20${address.city},%20${address.country}+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed`}
+        >
+          <a href="https://www.maps.ie/population/">Find Population on Map</a>
+        </iframe>
+      </Box>
+      <Card square raised sx={{ width: 300, margin: "auto" }} className="cards">
+        <CardActionArea>
+          <CardMedia component="img" height={200} image={img} alt="image" />
+        </CardActionArea>
+        <CardHeader title={title} subheader={subtitle}></CardHeader>
+        <Divider></Divider>
+        <CardContent>
           <Typography component="span" fontWeight={700}>
-            Website:
+            {description}
           </Typography>
-          {web}
-        </Typography>
-        <Typography>
-          <Typography component="span" fontWeight={700}>
-            Email:
+          <Typography>
+            <Typography component="span" fontWeight={700}>
+              Website:
+            </Typography>
+            {web}
           </Typography>
-          {email}
-        </Typography>
-        <Typography>
-          <Typography component="span" fontWeight={700}>
-            Phone:
+          <Typography>
+            <Typography component="span" fontWeight={700}>
+              Email:
+            </Typography>
+            {email}
           </Typography>
-          {phone}
-        </Typography>
-        <Typography>
-          <Typography component="span" fontWeight={700}>
-            Address:
+          <Typography>
+            <Typography component="span" fontWeight={700}>
+              Phone:
+            </Typography>
+            {phone}
           </Typography>
-          {address.state},{address.country},{address.city},{address.street},
-          {address.houseNumber}
-        </Typography>
-        <Typography>
-          <Typography component="span" fontWeight={700}>
-            Card number:
+          <Typography>
+            <Typography component="span" fontWeight={700}>
+              Address:
+            </Typography>
+            {address.state},{address.country},{address.city},{address.street},
+            {address.houseNumber}
           </Typography>
-          {cardNumber}
-        </Typography>
-        <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Box>
-            {login && login.isAdmin && (
-              <IconButton onClick={handleDeleteClick}>
-                <DeleteIcon />
-              </IconButton>
-            )}
-
-            {/* Edit only for my own cards */}
-            {(login && login.isAdmin) ||
-              (login.isBusiness && (
-                <IconButton onClick={handleEditeClick}>
-                  <ModeIcon />
+          <Typography>
+            <Typography component="span" fontWeight={700}>
+              Card number:
+            </Typography>
+            {cardNumber}
+          </Typography>
+          <Box sx={{ display: "flex", justifyContent: "space-between" }}>
+            <Box>
+              {login && login.isAdmin && (
+                <IconButton onClick={handleDeleteClick}>
+                  <DeleteIcon />
                 </IconButton>
-              ))}
-          </Box>
-          <Box>
-            <IconButton onClick={handlePhoneClick}>
-              <LocalPhoneIcon />
-            </IconButton>
-            {login && (
-              <IconButton onClick={handleFavoriteClick}>
-                <FavoriteIcon />
+              )}
+
+              {/* Edit only for my own cards */}
+              {(login && login.isAdmin) ||
+                (login.isBusiness && (
+                  <IconButton onClick={handleEditeClick}>
+                    <ModeIcon />
+                  </IconButton>
+                ))}
+            </Box>
+            <Box>
+              <IconButton onClick={handlePhoneClick}>
+                <LocalPhoneIcon />
               </IconButton>
-            )}
+              {login && (
+                <IconButton onClick={handleFavoriteClick}>
+                  <FavoriteIcon color={liked ? "error" : "inherit"} />
+                </IconButton>
+              )}
+            </Box>
           </Box>
-        </Box>
-      </CardContent>
-    </Card>
+        </CardContent>
+      </Card>
+    </Box>
   );
 };
 DetailsCardComponent.propTypes = {

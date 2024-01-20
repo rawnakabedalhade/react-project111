@@ -2,27 +2,39 @@ import AddCircleSharpIcon from "@mui/icons-material/AddCircleSharp";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { IconButton, Typography, Grid, Button } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import { useEffect, useState } from "react";
-import ROUTES from "../routes/ROUTES";
-import CardComponent from "../Components/CardComponent";
+import { useContext, useEffect, useState } from "react";
+import ROUTES from "../../routes/ROUTES";
+import CardComponent from "../../Components/CardComponent";
+import useDeleteCard from "../../hooks/useDeleteCard";
+import useFavoriteCard from "../../hooks/useFavoriteCard";
 import axios from "axios";
 import { toast } from "react-toastify";
+import normalizeCards from "./normalizeMyCards";
+import loginContext from "../../store/loginContext";
 const MyCards = () => {
   let [count, setCount] = useState(4);
   let [cardsFromServer, setCardsFromServer] = useState([]);
+  let { login } = useContext(loginContext);
+  const handleDelete = useDeleteCard();
+  const handleFavorite = useFavoriteCard();
   const navigate = useNavigate();
 
   useEffect(() => {
     axios
       .get("/cards/my-cards")
       .then(({ data }) => {
-        setCardsFromServer(data);
+        setCardsFromServer(normalizeCards(data));
       })
       .catch((err) => {
         console.log("error from axios", err);
       });
-  }, [setCardsFromServer]);
-  if (!cardsFromServer || !cardsFromServer.length) {
+  }, []);
+
+  let cardsFromServerFiltered = normalizeCards(
+    cardsFromServer,
+    login ? login._id : undefined
+  );
+  if (!cardsFromServerFiltered || !cardsFromServerFiltered.length) {
     return <Typography>Could not find any items</Typography>;
   }
 
@@ -30,45 +42,51 @@ const MyCards = () => {
     navigate(ROUTES.CREATECARD);
   };
   const handleDeleteCard = (id) => {
-    setCardsFromServer((currentDataFromServer) =>
-      currentDataFromServer.filter((card) => card._id !== id)
-    );
-    toast("🦄 Card Is Deleted", {
-      position: "top-right",
-      autoClose: 2000,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: true,
-      draggable: true,
-      progress: undefined,
-      theme: "dark",
-    });
+    handleDelete(id);
   };
-
+  const handleEditeCard = (id) => {
+    navigate(`${ROUTES.EDITCARD}/${id}`);
+  };
   const handlePhoneCard = (phone) => {
-    console.log("parent: Phone to call", phone);
+    console.log("father:Phone Card", phone);
   };
-
-  const handleEditCard = (id) => {
-    console.log("parent: card to edit", id);
+  const handleFavoriteCard = (id) => {
+    handleFavorite(id);
   };
-  const handleFavCard = () => {};
   const handleShowMore = () => {
     setCount((c) => (c += 4));
-    // setDataFromServer((cData) => cData + 4);
   };
 
   return (
     <div>
+      <Typography
+        variant="h2"
+        sx={{ textAlign: "left", mb: 1, color: "white", fontFamily: "cursive" }}
+      >
+        My Cards Page
+        <Typography
+          variant="h5"
+          sx={{ textAlign: "left", mb: 10, color: "white" }}
+        >
+          Here you can find your own cards.
+        </Typography>
+      </Typography>
+
       <IconButton
         color="primary"
-        sx={{ marginLeft: 120, width: "200px" }}
+        sx={{
+          marginLeft: 150,
+          my: 20,
+          fontSize: "large",
+          position: "absolute",
+        }}
         onClick={handleCreateCard}
       >
         <AddCircleSharpIcon />
       </IconButton>
+
       <Grid container spacing={2} mt={7}>
-        {cardsFromServer.slice(0, count).map((item, index) => (
+        {cardsFromServerFiltered.slice(0, count).map((item, index) => (
           <Grid item lg={3} md={3} xs={12} key={"carsCard" + index}>
             <CardComponent
               id={item._id}
@@ -77,28 +95,30 @@ const MyCards = () => {
               img={item.image.url}
               phone={item.phone}
               address={item.address}
+              liked={item.liked}
               cardNumber={item.bizNumber}
               onDelete={handleDeleteCard}
               onPhone={handlePhoneCard}
-              onEdit={handleEditCard}
-              onFavorite={handleFavCard}
+              onEdit={handleEditeCard}
+              onFavorite={handleFavoriteCard}
             />
           </Grid>
         ))}
       </Grid>
-      <div style={{ textAlign: "center" }}>
-        {count < cardsFromServer.length && (
+      <Grid sx={{ textAlign: "center", position: "relative", mb: 10 }}>
+        {count < cardsFromServerFiltered.length && (
           <Button
             variant="contained"
             endIcon={<ExpandMoreIcon />}
             onClick={handleShowMore}
-            color="secondary"
+            color="primary"
+            fullWidth
             sx={{ mt: 2 }}
           >
             Show More Cards
           </Button>
         )}
-      </div>
+      </Grid>
     </div>
   );
 };

@@ -18,7 +18,7 @@ import { useContext, useState } from "react";
 import loginContext from "../store/loginContext";
 import { useNavigate, useLocation } from "react-router-dom";
 import ROUTES from "../routes/ROUTES";
-import cardContext from "../store/cardContext";
+import "../style/card.css";
 
 const CardComponent = ({
   title,
@@ -35,16 +35,13 @@ const CardComponent = ({
   onFavorite,
 }) => {
   let { login } = useContext(loginContext);
-  let { dataFromServer } = useContext(cardContext);
   const navigate = useNavigate();
   let location = useLocation();
 
   const handleDeleteClick = () => {
-    console.log("delete " + id);
     onDelete(id);
   };
   const handleEditeClick = () => {
-    console.log("create " + id);
     onEdit(id);
   };
   const handlePhoneClick = () => {
@@ -54,7 +51,7 @@ const CardComponent = ({
     onFavorite(id);
   };
   return (
-    <Card square raised>
+    <Card square raised className="cards">
       <CardActionArea>
         <CardMedia
           component="img"
@@ -64,7 +61,11 @@ const CardComponent = ({
           onClick={() => navigate(`${ROUTES.CARDETAILS}/${id}`)}
         />
       </CardActionArea>
-      <CardHeader title={title} subheader={subtitle}></CardHeader>
+      <CardHeader
+        title={title}
+        subheader={subtitle}
+        className="heading"
+      ></CardHeader>
       <Divider></Divider>
       <CardContent>
         <Typography>

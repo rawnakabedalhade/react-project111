@@ -4,11 +4,11 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
 import IconButton from "@mui/material/IconButton";
+import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import MenuIcon from "@mui/icons-material/Menu";
-import LogoutIcon from "@mui/icons-material/Logout";
 import Hidden from "@mui/material/Hidden";
-import NightsStayIcon from "@mui/icons-material/NightsStay";
+import DarkModeIcon from "@mui/icons-material/DarkMode";
 import WbSunnyIcon from "@mui/icons-material/WbSunny";
 import AccountCircle from "@mui/icons-material/AccountCircle";
 import { Switch } from "@mui/material";
@@ -20,6 +20,7 @@ import { useNavigate } from "react-router-dom";
 import FilterComponent from "./ui/FilterComponent";
 import loginContext from "../../store/loginContext";
 import ROUTES from "../../routes/ROUTES";
+import LogoutIcon from "@mui/icons-material/Logout";
 
 const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -79,9 +80,9 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             variant="h6"
             noWrap
             component="div"
-            sx={{ display: { xs: "none", sm: "block" } }}
+            sx={{ display: { xs: "none", sm: "block" }, fontFamily: "cursive" }}
           >
-            LOGO
+            Card-Management 🃏
           </Typography>
           <Links />
           <FilterComponent />
@@ -97,11 +98,18 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             <Switch
               checked={isDarkTheme}
               onChange={handleThemeChange}
-              icon={isDarkTheme ? <NightsStayIcon /> : <WbSunnyIcon />}
+              icon={isDarkTheme ? <DarkModeIcon /> : <WbSunnyIcon />}
             />
           </Box>
           <Box sx={{ flexGrow: 1 }} />
-          <Box sx={{ display: { xs: "none", md: "flex" } }}>
+          <Box
+            sx={{
+              display: {
+                xs: "none",
+                md: "flex",
+              },
+            }}
+          >
             <IconButton
               size="large"
               edge="end"
@@ -110,12 +118,16 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
               aria-haspopup="true"
               onClick={handleProfileMenuOpen}
               color="inherit"
+              sx={{ mx: 5, width: "90" }}
             >
               <AccountCircle />
             </IconButton>
-            <IconButton aria-label="logOut" onClick={handleLogout}>
-              <LogoutIcon />
-            </IconButton>
+            <Button onClick={handleLogout} sx={{ color: "white", width: "70" }}>
+              Log Out
+              <IconButton color="inherit" aria-label="log out">
+                <LogoutIcon />
+              </IconButton>
+            </Button>
           </Box>
         </Toolbar>
       </AppBar>

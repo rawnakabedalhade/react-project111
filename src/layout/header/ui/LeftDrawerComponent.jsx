@@ -21,6 +21,7 @@ import ArchiveIcon from "@mui/icons-material/Archive";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../../routes/ROUTES";
 import { toast } from "react-toastify";
+import AccountCircle from "@mui/icons-material/AccountCircle";
 
 const LeftDrawerComponent = ({ isOpen, onCloseDrawer }) => {
   let navigate = useNavigate();
@@ -115,7 +116,7 @@ const LeftDrawerComponent = ({ isOpen, onCloseDrawer }) => {
         <ListItem key="Profile" disablePadding>
           <ListItemButton onClick={handleRoutes}>
             <ListItemIcon>
-              <FavoriteIcon />
+              <AccountCircle />
             </ListItemIcon>
             <ListItemText primary="Profile" />
           </ListItemButton>

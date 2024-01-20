@@ -10,7 +10,10 @@ import loginContext from "../../store/loginContext";
 const FooterComponent = () => {
   let { login } = useContext(loginContext);
   return (
-    <Paper elevation={4} sx={{ position: "sticky", mt: 2 }}>
+    <Paper
+      elevation={4}
+      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+    >
       <BottomNavigation showLabels>
         <BottomNavigationAction label="About" icon={<InfoIcon />} />
         {login && (

@@ -12,7 +12,7 @@ import ProfilePage from "../pages/ProfilePage";
 import CreateCardPage from "../pages/CreateCard/CreateCard";
 import BizGuard from "../guard/BizGuard";
 import FavCards from "../pages/FavCards/FavCards";
-import MyCards from "../pages/MyCards";
+import MyCards from "../pages/MyCards/MyCards";
 import CardDetails from "../pages/CardDetails/CardDetails";
 
 const Router = () => {
@@ -49,6 +49,7 @@ const Router = () => {
           </BizGuard>
         }
       />
+      <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );
 };

@@ -1,7 +1,6 @@
 import { useState } from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
-import TextField from "@mui/material/TextField";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
 import Grid from "@mui/material/Grid";
@@ -16,6 +15,7 @@ import { toast } from "react-toastify";
 
 import { validateSchema } from "../../validation/registerValidation";
 import TextInputComponent from "../../Components/TextInputComponent";
+import "../../style/login.css";
 
 const RegisterPage = () => {
   const [btn, setbtn] = useState(true);
@@ -123,7 +123,7 @@ const RegisterPage = () => {
         alignItems: "center",
       }}
     >
-      <Avatar sx={{ m: 1, bgcolor: "secondary.main" }}>
+      <Avatar sx={{ m: 1, bgcolor: "black" }}>
         <LockOutlinedIcon />
       </Avatar>
       <Typography component="h1" variant="h5">
@@ -141,6 +141,7 @@ const RegisterPage = () => {
               onBlur={handleInputsBlur}
               errors={errors[keyName]}
               required={isrequired(keyName)}
+              className="input"
             />
           ))}
         </Grid>
@@ -159,13 +160,14 @@ const RegisterPage = () => {
           variant="contained"
           sx={{ mt: 3, mb: 2 }}
           disabled={btn}
+          className="button-submit"
         >
           Sign Up
         </Button>
       </Box>
       <Grid container justifyContent="flex-end">
         <Grid item>
-          <Link to={ROUTES.LOGIN} variant="body2">
+          <Link to={ROUTES.LOGIN} variant="body2" className="span">
             Already have an account? Sign in
           </Link>
         </Grid>

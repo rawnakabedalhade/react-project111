@@ -3,8 +3,15 @@ import { useParams } from "react-router-dom";
 import axios from "axios";
 import fromServer from "../CardDetails/normalizeDetails";
 import DetailsCardComponent from "../../Components/DetailsCardComponent";
+import useDeleteCard from "../../hooks/useDeleteCard";
+import useFavoriteCard from "../../hooks/useFavoriteCard";
+import { useNavigate } from "react-router-dom";
+import ROUTES from "../../routes/ROUTES";
 
 const CardDetails = () => {
+  const handleDelete = useDeleteCard();
+  const handleFavorite = useFavoriteCard();
+  const navigate = useNavigate();
   let [CardDetails, setCardDetails] = useState({
     title: "",
     subtitle: "",
@@ -23,17 +30,17 @@ const CardDetails = () => {
     });
   }, [id]);
   const handleDeleteCard = (id) => {
-    console.log("father: card to delete", id);
+    handleDelete(id);
   };
 
   const handleEditeCard = (id) => {
-    console.log("father:card to Create", id);
+    navigate(`${ROUTES.EDITCARD}/${id}`);
   };
   const handlePhoneCard = (phone) => {
     console.log("father:Phone Card", phone);
   };
   const handleFavoriteCard = (id) => {
-    console.log("father:Favorite Card", id);
+    handleFavorite(id);
   };
   return (
     <DetailsCardComponent
@@ -47,6 +54,7 @@ const CardDetails = () => {
       phone={CardDetails.phone}
       address={CardDetails.address}
       cardNumber={CardDetails.bizNumber}
+      liked={CardDetails.liked}
       onDelete={handleDeleteCard}
       onEdit={handleEditeCard}
       onPhone={handlePhoneCard}

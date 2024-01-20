@@ -3,8 +3,6 @@ import Search from "./Search";
 import SearchIconWrapper from "./SearchIconWrapper";
 import StyledInputBase from "./StyledInputBase";
 import { useState, useEffect, useContext } from "react";
-import axios from "axios";
-import { Typography } from "@mui/material";
 import cardContext from "../../../store/cardContext";
 
 const FilterComponent = () => {
