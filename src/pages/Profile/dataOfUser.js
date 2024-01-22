@@ -1,22 +1,17 @@
 const dataOfUser = (data) => {
   return {
-    first: data.first,
-    middle: data.middle,
-    last: data.last,
-
+    first: data.name.first,
+    middle: data.name.middle,
+    last: data.name.last,
     phone: data.phone,
-    email: data.email,
-    password: data.password,
-
-    url: data.url,
-    alt: data.alt,
-
-    state: data.state,
-    country: data.country,
-    city: data.city,
-    street: data.street,
-    houseNumber: data.houseNumber,
-    zip: data.zip,
+    url: data.image.url,
+    alt: data.image.alt,
+    state: data.address.state,
+    country: data.address.country,
+    city: data.address.city,
+    street: data.address.street,
+    houseNumber: data.address.houseNumber,
+    zip: data.address.zip,
   };
 };
 

@@ -12,7 +12,7 @@ const FooterComponent = () => {
   return (
     <Paper
       elevation={4}
-      sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+      sx={{ position: "sticky", bottom: 0, left: 0, right: 0 }}
     >
       <BottomNavigation showLabels>
         <BottomNavigationAction label="About" icon={<InfoIcon />} />

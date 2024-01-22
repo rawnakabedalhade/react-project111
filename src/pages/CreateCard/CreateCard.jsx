@@ -9,7 +9,6 @@ import { normalizeCtreate } from "./normalizeCreate.js";
 import { toast } from "react-toastify";
 import loginContext from "../../store/loginContext.js";
 import validateSchema from "../../validation/cardValidation.js";
-import CardComponent from "../../Components/CardComponent.jsx";
 
 const CreateCard = () => {
   const [inputsValue, setInputsValue] = useState({
@@ -62,6 +61,16 @@ const CreateCard = () => {
       navigate(ROUTES.MYCARDS);
     } catch (err) {
       console.log("error from axios", err);
+      toast.error("🦄 Oops... try again!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
     }
   };
   const handleInputsChange = (e) => {

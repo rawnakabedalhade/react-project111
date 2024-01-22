@@ -96,7 +96,8 @@ const CardComponent = ({
             )}
 
             {/* Edit only for my own cards */}
-            {login && location.pathname === ROUTES.MYCARDS && (
+            {((login && location.pathname === ROUTES.MYCARDS) ||
+              login.isAdmin) && (
               <IconButton onClick={handleEditeClick}>
                 <ModeIcon />
               </IconButton>

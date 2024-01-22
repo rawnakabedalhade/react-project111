@@ -57,15 +57,15 @@ const EditCardPage = () => {
           setErrors({});
         } else {
           //not the same user
-          toast.warning("Cant Edit", {
+          toast.error("🦄 Oops...try again!", {
             position: "top-right",
-            autoClose: 3000,
+            autoClose: 5000,
             hideProgressBar: false,
             closeOnClick: true,
             pauseOnHover: true,
             draggable: true,
             progress: undefined,
-            theme: "dark",
+            theme: "light",
           });
           navigate(ROUTES.HOME);
         }
@@ -120,12 +120,30 @@ const EditCardPage = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(1);
     try {
       let { data } = await axios.put(`/cards/${id}`, ToServer(inputsValue));
-      console.log("data2" + data);
+      toast.success("🦄 Create Card Done!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       navigate(ROUTES.HOME);
     } catch (error) {
+      toast.error("🦄 Oops...try again!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+        theme: "light",
+      });
       console.log("error from update", error);
     }
   };
