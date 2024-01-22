@@ -10,6 +10,7 @@ const TextInputComponent = ({
   onBlur,
   errors,
   required,
+  disabled,
 }) => {
   return (
     <Grid item xs={xs}>
@@ -17,12 +18,13 @@ const TextInputComponent = ({
         name={id}
         fullWidth
         id={id}
-        type={label === "password" ? "password" : ""}
+        type={label === "password" ? "password" : "text"}
         label={label}
         value={value}
         onChange={onChange}
         onBlur={onBlur}
         required={required}
+        disabled={disabled}
       />
       {errors && <Alert severity="error">{errors}</Alert>}
     </Grid>

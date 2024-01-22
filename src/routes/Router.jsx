@@ -8,7 +8,7 @@ import AboutUsPage from "./../pages/AboutUsPage";
 
 import EditCardPage from "../pages/EditCard/EditCardPage";
 import AuthGuard from "../guard/AuthGuard";
-import ProfilePage from "../pages/ProfilePage";
+import ProfilePage from "../pages/Profile/ProfilePage";
 import CreateCardPage from "../pages/CreateCard/CreateCard";
 import BizGuard from "../guard/BizGuard";
 import FavCards from "../pages/FavCards/FavCards";

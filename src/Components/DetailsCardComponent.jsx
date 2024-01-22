@@ -51,6 +51,7 @@ const DetailsCardComponent = ({
   const handleFavoriteClick = () => {
     onFavorite(id);
   };
+  const src = `https://maps.google.com/maps?&q="+${address}"&output=embed`;
   return (
     <Box
       sx={{
@@ -61,6 +62,9 @@ const DetailsCardComponent = ({
       }}
     >
       <Box sx={{ width: "70%" }}>
+        <Typography component="h1" variant="h5">
+          Card Location:
+        </Typography>
         <iframe
           width="100%"
           height="600"
@@ -68,7 +72,7 @@ const DetailsCardComponent = ({
           scrolling="no"
           marginheight="0"
           marginwidth="0"
-          src={`https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=1%20${address.street}%20Street,%20${address.city},%20${address.country}+(My%20Business%20Name)&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed`}
+          src={src}
         >
           <a href="https://www.maps.ie/population/">Find Population on Map</a>
         </iframe>

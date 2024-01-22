@@ -61,12 +61,12 @@ const MyCards = () => {
     <div>
       <Typography
         variant="h2"
-        sx={{ textAlign: "left", mb: 1, color: "white", fontFamily: "cursive" }}
+        sx={{ textAlign: "left", mb: 1, color: "black", fontFamily: "cursive" }}
       >
         My Cards Page
         <Typography
           variant="h5"
-          sx={{ textAlign: "left", mb: 10, color: "white" }}
+          sx={{ textAlign: "left", mb: 10, color: "blck" }}
         >
           Here you can find your own cards.
         </Typography>
