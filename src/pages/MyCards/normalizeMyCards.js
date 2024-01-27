@@ -5,6 +5,7 @@ const normalizeCards = (cards, myId) => {
     ...card,
     liked: card.likes.includes(myId),
   }));
+  console.log(newCards, "newCards");
   return newCards;
 };
 

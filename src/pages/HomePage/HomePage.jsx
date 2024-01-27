@@ -11,6 +11,7 @@ import loginContext from "../../store/loginContext";
 import normalizeHome from "./normalizeHome";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
+import Background from "../../Components/Background";
 const HomePage = () => {
   let { setDataFromServer, dataFromServer, setCopyCards } =
     useContext(cardContext);
@@ -58,19 +59,12 @@ const HomePage = () => {
 
   return (
     <>
-      <Typography
-        variant="h2"
-        sx={{ textAlign: "left", mb: 1, color: "black", fontFamily: "cursive" }}
-      >
-        Cards Page
-        <Typography
-          variant="h5"
-          sx={{ textAlign: "left", mb: 10, color: "black" }}
-        >
-          Here you can find business cards from all categories.
-        </Typography>
-      </Typography>
-      <Grid container spacing={2}>
+      <Background
+        header={"Cards Page"}
+        sub={"Here you can find business cards from all categories."}
+        fullWidth
+      />
+      <Grid container spacing={2} mt={2}>
         {dataFromServerFiltered.slice(0, count).map((item, index) => (
           <Grid item lg={3} md={6} xs={12} key={"cards" + index}>
             <CardComponent
@@ -98,7 +92,7 @@ const HomePage = () => {
             onClick={handleShowMore}
             color="primary"
             fullWidth
-            sx={{ mt: 2 }}
+            sx={{ mt: 2, bgcolor: "#ff5722" }}
           >
             Show More Cards
           </Button>

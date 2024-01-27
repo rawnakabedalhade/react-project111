@@ -182,7 +182,7 @@ const LoginPage = () => {
               type="submit"
               fullWidth
               variant="contained"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 3, mb: 2, bgcolor: "#ff5722" }}
               disabled={emailError || passwordError}
               className="button-submit"
             >
@@ -190,7 +190,11 @@ const LoginPage = () => {
             </Button>
             <Grid container>
               <Grid item xs>
-                <Link href="#" variant="body2" className="span">
+                <Link
+                  to={ROUTES.FORGOTPASSWORD}
+                  variant="body2"
+                  className="span"
+                >
                   Forgot password?
                 </Link>
               </Grid>

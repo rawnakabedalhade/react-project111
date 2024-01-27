@@ -61,8 +61,8 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
 
   const menuId = "primary-search-account-menu";
   return (
-    <Box sx={{ flexGrow: 1, mb: 2 }}>
-      <AppBar position="static">
+    <Box sx={{ flexGrow: 1 }}>
+      <AppBar position="static" sx={{ backgroundColor: "white" }}>
         <Toolbar>
           <Hidden mdUp>
             <IconButton
@@ -81,6 +81,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             noWrap
             component="div"
             sx={{ display: { xs: "none", sm: "block" }, fontFamily: "cursive" }}
+            color="#ff5722"
           >
             Card-Management 🃏
           </Typography>
@@ -92,7 +93,9 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
               p: 1,
             }}
           >
-            <Typography sx={{ display: { xs: "none", md: "inline" } }}>
+            <Typography
+              sx={{ display: { xs: "none", md: "inline", color: "#ff5722" } }}
+            >
               {isDarkTheme ? "Dark" : "Light"} Mode
             </Typography>
             <Switch
@@ -122,7 +125,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             >
               <AccountCircle />
             </IconButton>
-            <Button onClick={handleLogout} sx={{ color: "white", width: "70" }}>
+            <Button onClick={handleLogout} sx={{ color: "black", width: "70" }}>
               Log Out
               <IconButton color="inherit" aria-label="log out">
                 <LogoutIcon />

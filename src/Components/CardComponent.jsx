@@ -94,8 +94,6 @@ const CardComponent = ({
                 <DeleteIcon />
               </IconButton>
             )}
-
-            {/* Edit only for my own cards */}
             {((login && location.pathname === ROUTES.MYCARDS) ||
               login.isAdmin) && (
               <IconButton onClick={handleEditeClick}>
@@ -129,10 +127,12 @@ CardComponent.propTypes = {
     houseNumber: PropTypes.number.isRequired,
   }).isRequired,
   cardNumber: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
+  liked: PropTypes.bool,
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func,
+  onPhone: PropTypes.func,
+  onFavorite: PropTypes.func,
 };
 
-CardComponent.defaultProps = {
-  // img: "/assets/imgs/car 1.jpg",
-  subtitle: "subtitle default",
-};
 export default CardComponent;

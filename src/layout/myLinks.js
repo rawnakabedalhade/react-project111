@@ -11,9 +11,6 @@ const loggedOutLinks = [
   { to: ROUTES.LOGIN, children: "LOGIN" },
   ,
 ];
-const adminLinks = [
-  { to: ROUTES.MYCARDS, children: "MY CARDS" },
-  { to: ROUTES.SANDBOX, children: "SANDBOX" },
-];
+const adminLinks = [{ to: ROUTES.CRM, children: "CRM" }];
 
 export { alwaysLinks, loggedInLinks, loggedOutLinks, bizLinks, adminLinks };

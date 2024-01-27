@@ -8,12 +8,13 @@ import CardComponent from "../../Components/CardComponent";
 import useDeleteCard from "../../hooks/useDeleteCard";
 import useFavoriteCard from "../../hooks/useFavoriteCard";
 import axios from "axios";
-import { toast } from "react-toastify";
 import normalizeCards from "./normalizeMyCards";
 import loginContext from "../../store/loginContext";
+import cardContext from "../../store/cardContext";
 const MyCards = () => {
   let [count, setCount] = useState(4);
-  let [cardsFromServer, setCardsFromServer] = useState([]);
+  let { setDataFromServer, dataFromServer, setCopyCards } =
+    useContext(cardContext);
   let { login } = useContext(loginContext);
   const handleDelete = useDeleteCard();
   const handleFavorite = useFavoriteCard();
@@ -23,7 +24,8 @@ const MyCards = () => {
     axios
       .get("/cards/my-cards")
       .then(({ data }) => {
-        setCardsFromServer(normalizeCards(data));
+        setDataFromServer(normalizeCards(data));
+        setCopyCards(normalizeCards(data));
       })
       .catch((err) => {
         console.log("error from axios", err);
@@ -31,7 +33,7 @@ const MyCards = () => {
   }, []);
 
   let cardsFromServerFiltered = normalizeCards(
-    cardsFromServer,
+    dataFromServer,
     login ? login._id : undefined
   );
   if (!cardsFromServerFiltered || !cardsFromServerFiltered.length) {
@@ -51,6 +53,7 @@ const MyCards = () => {
     console.log("father:Phone Card", phone);
   };
   const handleFavoriteCard = (id) => {
+    console.log(1);
     handleFavorite(id);
   };
   const handleShowMore = () => {

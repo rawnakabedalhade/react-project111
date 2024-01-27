@@ -152,9 +152,8 @@ const DetailsCardComponent = ({
 };
 DetailsCardComponent.propTypes = {
   title: PropTypes.string.isRequired,
-  subtitle: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired,
-  img: PropTypes.string.isRequired,
+  subtitle: PropTypes.string,
+  img: PropTypes.string,
   phone: PropTypes.string.isRequired,
   address: PropTypes.shape({
     city: PropTypes.string.isRequired,
@@ -162,10 +161,11 @@ DetailsCardComponent.propTypes = {
     houseNumber: PropTypes.number.isRequired,
   }).isRequired,
   cardNumber: PropTypes.number.isRequired,
-};
-
-DetailsCardComponent.defaultProps = {
-  // img: "/assets/imgs/car 1.jpg",
-  subtitle: "subtitle default",
+  id: PropTypes.string.isRequired,
+  liked: PropTypes.bool,
+  onDelete: PropTypes.func,
+  onEdit: PropTypes.func,
+  onPhone: PropTypes.func,
+  onFavorite: PropTypes.func,
 };
 export default DetailsCardComponent;

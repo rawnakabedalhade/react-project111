@@ -13,7 +13,7 @@ const LayoutComponent = ({ children }) => {
   const finishAutoLogin = useAutoLogin();
   const themes = tmc({
     "text.headerColor": "!gray",
-    "text.headerActive": "*white",
+    "text.headerActive": "*#ff5722",
     favActive: "*#FB0000",
   });
 

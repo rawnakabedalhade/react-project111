@@ -4,6 +4,7 @@ import {
   loggedInLinks,
   loggedOutLinks,
   bizLinks,
+  adminLinks,
 } from "../../myLinks";
 import NavLinkComponent from "../NavLinkComponent";
 import loginContext from "../../../store/loginContext";
@@ -35,6 +36,13 @@ const Links = () => {
       {!loggedIn &&
         loggedOutLinks.map((myItem, index) => (
           <NavLinkComponent to={myItem.to} key={"linksnav3" + index}>
+            {myItem.children}
+          </NavLinkComponent>
+        ))}
+      {loggedIn &&
+        loggedIn.isAdmin &&
+        adminLinks.map((myItem, index) => (
+          <NavLinkComponent to={myItem.to} key={"linksnav4" + index}>
             {myItem.children}
           </NavLinkComponent>
         ))}

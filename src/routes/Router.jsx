@@ -5,15 +5,17 @@ import LoginPage from "../pages/LoginPage/LoginPage";
 import RegisterPage from "../pages/RegisterPage/RegisterPage";
 import NotFoundPage from "../pages/NotFoundPage";
 import AboutUsPage from "./../pages/AboutUsPage";
-
+import CRMPage from "../pages/CRM/CRMPage";
 import EditCardPage from "../pages/EditCard/EditCardPage";
 import AuthGuard from "../guard/AuthGuard";
 import ProfilePage from "../pages/Profile/ProfilePage";
 import CreateCardPage from "../pages/CreateCard/CreateCard";
 import BizGuard from "../guard/BizGuard";
+import AdminGuard from "../guard/AdminGuard";
 import FavCards from "../pages/FavCards/FavCards";
 import MyCards from "../pages/MyCards/MyCards";
 import CardDetails from "../pages/CardDetails/CardDetails";
+import Fpassword from "../pages/Fpassword";
 
 const Router = () => {
   return (
@@ -49,6 +51,16 @@ const Router = () => {
           </BizGuard>
         }
       />
+      <Route
+        path={ROUTES.CRM}
+        element={
+          <AdminGuard>
+            <CRMPage />
+          </AdminGuard>
+        }
+      />
+      <Route path={ROUTES.FORGOTPASSWORD} element={<Fpassword />} />
+
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
   );

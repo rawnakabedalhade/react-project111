@@ -9,7 +9,6 @@ import LoginContext from "../../store/loginContext";
 import { fromServer } from "./normalizeEdit";
 import { toast } from "react-toastify";
 import ROUTES from "../../routes/ROUTES.js";
-import CardComponent from "../../Components/CardComponent.jsx";
 import ToServer from "./ToServer.js";
 
 const EditCardPage = () => {
@@ -183,7 +182,7 @@ const EditCardPage = () => {
           type="submit"
           fullWidth
           variant="contained"
-          sx={{ mt: 3, mb: 2 }}
+          sx={{ mt: 3, mb: 2, bgcolor: "#ff5722" }}
           disabled={Object.keys(errors).length > 0}
         >
           Edit Card
