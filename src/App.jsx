@@ -9,7 +9,7 @@ import userContext from "./store/userContext";
 import UsersInfo from "./pages/CRM/UsersInfo";
 
 function App() {
-  const [login, setLogin] = useState(null);
+  const [login, setLogin] = useState(false);
   const [dataFromServer, setDataFromServer] = useState([]);
   const [copyCards, setCopyCards] = useState([]);
   const [FavCard, setFavCard] = useState([]);

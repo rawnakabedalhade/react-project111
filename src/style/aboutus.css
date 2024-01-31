@@ -3,7 +3,12 @@ body {
   padding: 0;
   box-sizing: border-box;
 }
-
+.containerbg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 h1,
 h2 {
   color: #333;
@@ -19,6 +24,8 @@ p {
   box-shadow: 0 4px 8px rgba(0, 5, 20, 0.1); /* Adjust values as needed */
   perspective: 1000px;
   margin: 0 auto;
+  background-color: #605757;
+  border-radius: 10px;
 }
 
 .card-inner {
@@ -54,4 +61,18 @@ p {
   border-radius: 10px;
   font-size: 24px;
   transform: rotateY(180deg);
+}
+.arrow {
+  margin-left: 3em;
+}
+@media only screen and (max-width: 768px) {
+  #card {
+    width: 95%;
+    height: 100vh;
+  }
+  h1,
+  h2,
+  p {
+    margin-left: 10px;
+  }
 }

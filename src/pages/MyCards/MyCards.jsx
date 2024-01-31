@@ -53,7 +53,6 @@ const MyCards = () => {
     console.log("father:Phone Card", phone);
   };
   const handleFavoriteCard = (id) => {
-    console.log(1);
     handleFavorite(id);
   };
   const handleShowMore = () => {
@@ -111,12 +110,11 @@ const MyCards = () => {
       <Grid sx={{ textAlign: "center", position: "relative", mb: 10 }}>
         {count < cardsFromServerFiltered.length && (
           <Button
-            variant="contained"
             endIcon={<ExpandMoreIcon />}
             onClick={handleShowMore}
             color="primary"
             fullWidth
-            sx={{ mt: 2 }}
+            sx={{ mt: 2, bgcolor: "#ff5722", color: "black" }}
           >
             Show More Cards
           </Button>

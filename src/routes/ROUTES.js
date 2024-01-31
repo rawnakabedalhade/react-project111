@@ -10,6 +10,7 @@ const ROUTES = {
   MYCARDS: "/mycards",
   CRM: "/crm",
   CARDETAILS: "/card-details",
+  USEREMAIL: "/useremail",
   FORGOTPASSWORD: "/forgotpassword",
 };
 export default ROUTES;

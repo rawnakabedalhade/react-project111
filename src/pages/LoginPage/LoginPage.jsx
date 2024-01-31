@@ -68,7 +68,7 @@ const LoginPage = () => {
       navigate(ROUTES.HOME);
     } catch (err) {
       console.log("err from axios", err);
-      setLogin(null);
+      setLogin(false);
       localStorage.clear();
     }
   };
@@ -181,8 +181,8 @@ const LoginPage = () => {
             <Button
               type="submit"
               fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2, bgcolor: "#ff5722" }}
+              // variant="contained"
+              sx={{ mt: 3, mb: 2, bgcolor: "#ff5722", color: "black" }}
               disabled={emailError || passwordError}
               className="button-submit"
             >

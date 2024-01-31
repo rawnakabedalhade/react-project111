@@ -1,7 +1,5 @@
-import { Fragment } from "react";
-import Typography from "@mui/material/Typography";
 import "../style/aboutus.css";
-import LoopIcon from "@mui/icons-material/Loop";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 const AboutUsPage = () => {
   return (
     <div class="containerbg">
@@ -13,14 +11,22 @@ const AboutUsPage = () => {
               Welcome to Card Management website, your go-to platform for
               managing and showcasing cards.
             </p>
+            <h2>Get Started Today</h2>
+            <p>
+              Join our website and start your journey of creativity and
+              organization. Showcase, create, edit, delete, and favorite cards
+              effortlessly.
+            </p>
+            <div className="arrow">
+              <ArrowBackIcon />
+            </div>
+          </div>
+
+          <div class="card-back">
             <h2>How It Works ?</h2>
             <p>
               At our website, we've simplified the Card Management process...
             </p>
-            <p>click on for more details</p>
-            <LoopIcon />
-          </div>
-          <div class="card-back">
             <ol>
               <li>
                 Show: Explore the diverse range of cards created by our
@@ -43,12 +49,6 @@ const AboutUsPage = () => {
                 reference.
               </li>
             </ol>
-            <h2>Get Started Today</h2>
-            <p>
-              Join our website and start your journey of creativity and
-              organization. Showcase, create, edit, delete, and favorite cards
-              effortlessly.
-            </p>
           </div>
         </div>
       </div>

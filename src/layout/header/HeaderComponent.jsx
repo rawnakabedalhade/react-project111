@@ -73,7 +73,7 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
               sx={{ mr: 2 }}
               onClick={handleOpenDrawerClick}
             >
-              <MenuIcon />
+              <MenuIcon sx={{ color: "black" }} />
             </IconButton>
           </Hidden>
           <Typography
@@ -101,7 +101,12 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
             <Switch
               checked={isDarkTheme}
               onChange={handleThemeChange}
-              icon={isDarkTheme ? <DarkModeIcon /> : <WbSunnyIcon />}
+              icon={
+                <WbSunnyIcon sx={{ color: "#ff5722", fontSize: "25px" }} /> // Light mode icon
+              }
+              checkedIcon={
+                <DarkModeIcon sx={{ color: "black", fontSize: "25px" }} /> // Dark mode icon
+              }
             />
           </Box>
           <Box sx={{ flexGrow: 1 }} />
@@ -123,7 +128,19 @@ const HeaderComponent = ({ isDarkTheme, onThemeChange }) => {
               color="inherit"
               sx={{ mx: 5, width: "90" }}
             >
-              <AccountCircle />
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <AccountCircle sx={{ color: "black", fontSize: "40px" }} />
+                <Typography sx={{ color: "black", fontWeight: "bold" }}>
+                  Account
+                </Typography>
+              </Box>
             </IconButton>
             <Button onClick={handleLogout} sx={{ color: "black", width: "70" }}>
               Log Out

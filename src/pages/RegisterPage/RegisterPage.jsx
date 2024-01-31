@@ -157,8 +157,7 @@ const RegisterPage = () => {
         <Button
           type="submit"
           fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2, bgcolor: "#ff5722" }}
+          sx={{ mt: 3, mb: 2, bgcolor: "#ff5722", color: "black" }}
           disabled={btn}
           className="button-submit"
         >

@@ -118,7 +118,7 @@ const DetailsCardComponent = ({
             </Typography>
             <Box sx={{ display: "flex", justifyContent: "space-between" }}>
               <Box>
-                {((login && login.isAdmin) ||
+                {((login && login?.isAdmin) ||
                   location.pathname === ROUTES.MYCARDS) && (
                   <IconButton onClick={handleDeleteClick}>
                     <DeleteIcon />

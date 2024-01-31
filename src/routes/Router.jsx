@@ -15,7 +15,6 @@ import AdminGuard from "../guard/AdminGuard";
 import FavCards from "../pages/FavCards/FavCards";
 import MyCards from "../pages/MyCards/MyCards";
 import CardDetails from "../pages/CardDetails/CardDetails";
-import Fpassword from "../pages/Fpassword";
 
 const Router = () => {
   return (
@@ -59,7 +58,6 @@ const Router = () => {
           </AdminGuard>
         }
       />
-      <Route path={ROUTES.FORGOTPASSWORD} element={<Fpassword />} />
 
       <Route path="*" element={<NotFoundPage />} />
     </Routes>

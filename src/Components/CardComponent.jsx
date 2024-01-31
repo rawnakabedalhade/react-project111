@@ -95,7 +95,7 @@ const CardComponent = ({
               </IconButton>
             )}
             {((login && location.pathname === ROUTES.MYCARDS) ||
-              login.isAdmin) && (
+              login?.isAdmin) && (
               <IconButton onClick={handleEditeClick}>
                 <ModeIcon />
               </IconButton>

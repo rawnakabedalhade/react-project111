@@ -45,32 +45,24 @@ const LeftDrawerComponent = ({ isOpen, onCloseDrawer }) => {
       navigate(ROUTES.LOGIN);
     }
   };
-  const handleRoutes = (key) => {
-    console.log(key.value);
-    switch (key) {
-      case "Home":
-        navigate(ROUTES.HOME);
-        break;
-      case "About Us":
-        navigate(ROUTES.ABOUT);
-        break;
-      case "Fav Cards":
-        navigate(ROUTES.FAVCARDS);
-        break;
-      case "My Cards":
-        navigate(ROUTES.MYCARDS);
-        break;
-      case "SandBox":
-        navigate(ROUTES.SANDBOX);
-        break;
-      case "Profile":
-        navigate(ROUTES.PROFILE);
-        break;
-      default:
-        break;
-    }
+  const handleHome = () => {
+    navigate(ROUTES.HOME);
   };
-
+  const handleAboutUs = () => {
+    navigate(ROUTES.ABOUT);
+  };
+  const handleProfile = () => {
+    navigate(ROUTES.PROFILE);
+  };
+  const handleFav = () => {
+    navigate(ROUTES.FAVCARDS);
+  };
+  const handleMyCards = () => {
+    navigate(ROUTES.MYCARDS);
+  };
+  const handleCrm = () => {
+    navigate(ROUTES.CRM);
+  };
   const list = () => (
     <Box
       sx={{ width: { auto: 250 } }}
@@ -96,7 +88,7 @@ const LeftDrawerComponent = ({ isOpen, onCloseDrawer }) => {
       </ListItem>
       <Divider />
       <ListItem key="Home" disablePadding>
-        <ListItemButton onClick={handleRoutes}>
+        <ListItemButton onClick={handleHome}>
           <ListItemIcon>
             <HomeIcon />
           </ListItemIcon>
@@ -104,7 +96,7 @@ const LeftDrawerComponent = ({ isOpen, onCloseDrawer }) => {
         </ListItemButton>
       </ListItem>
       <ListItem key="About Us" disablePadding>
-        <ListItemButton onClick={handleRoutes}>
+        <ListItemButton onClick={handleAboutUs}>
           <ListItemIcon>
             <InfoIcon />
           </ListItemIcon>
@@ -114,7 +106,7 @@ const LeftDrawerComponent = ({ isOpen, onCloseDrawer }) => {
       <Divider />
       {login && (
         <ListItem key="Profile" disablePadding>
-          <ListItemButton onClick={handleRoutes}>
+          <ListItemButton onClick={handleProfile}>
             <ListItemIcon>
               <AccountCircle />
             </ListItemIcon>
@@ -126,7 +118,7 @@ const LeftDrawerComponent = ({ isOpen, onCloseDrawer }) => {
       <List>
         {login && (
           <ListItem key="Fav Cards" disablePadding>
-            <ListItemButton onClick={handleRoutes}>
+            <ListItemButton onClick={handleFav}>
               <ListItemIcon>
                 <FavoriteIcon />
               </ListItemIcon>
@@ -136,7 +128,7 @@ const LeftDrawerComponent = ({ isOpen, onCloseDrawer }) => {
         )}
         {login && (login.isBusiness || login.isAdmin) && (
           <ListItem key="My Cards" disablePadding>
-            <ListItemButton onClick={handleRoutes}>
+            <ListItemButton onClick={handleMyCards}>
               <ListItemIcon>
                 <FeedIcon />
               </ListItemIcon>
@@ -145,8 +137,8 @@ const LeftDrawerComponent = ({ isOpen, onCloseDrawer }) => {
           </ListItem>
         )}
         {login && login.isAdmin && (
-          <ListItem key="SandBox" disablePadding>
-            <ListItemButton onClick={handleRoutes}>
+          <ListItem key="CRM" disablePadding>
+            <ListItemButton onClick={handleCrm}>
               <ListItemIcon>
                 <ArchiveIcon />
               </ListItemIcon>

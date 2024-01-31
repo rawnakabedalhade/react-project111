@@ -1,4 +1,4 @@
-const fromServer = (dataFromServer) => {
+const fromServer = (dataFromServer, likesArr) => {
   return {
     title: dataFromServer.title,
     subtitle: dataFromServer.subtitle,
@@ -9,6 +9,8 @@ const fromServer = (dataFromServer) => {
     url: dataFromServer.image.url,
     address: dataFromServer.address,
     bizNumber: dataFromServer.bizNumber,
+    likes: likesArr,
   };
 };
+
 export default fromServer;

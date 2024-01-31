@@ -146,8 +146,7 @@ const CreateCard = () => {
         <Button
           type="submit"
           fullWidth
-          variant="contained"
-          sx={{ mt: 3, mb: 2, bgcolor: "#ff5722" }}
+          sx={{ mt: 3, mb: 2, bgcolor: "#ff5722", color: "black" }}
           disabled={Object.keys(errors).length > 0}
         >
           Create Card

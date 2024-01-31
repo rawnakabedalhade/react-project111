@@ -11,7 +11,7 @@ import loginContext from "../../store/loginContext";
 import normalizeHome from "./normalizeHome";
 import { useNavigate } from "react-router-dom";
 import ROUTES from "../../routes/ROUTES";
-import Background from "../../Components/Background";
+
 const HomePage = () => {
   let { setDataFromServer, dataFromServer, setCopyCards } =
     useContext(cardContext);
@@ -24,8 +24,6 @@ const HomePage = () => {
     axios
       .get("/cards")
       .then(({ data }) => {
-        console.log(data);
-        console.log(normalizeHome(data));
         setDataFromServer(normalizeHome(data));
         setCopyCards(data);
       })
@@ -59,11 +57,18 @@ const HomePage = () => {
 
   return (
     <>
-      <Background
-        header={"Cards Page"}
-        sub={"Here you can find business cards from all categories."}
-        fullWidth
-      />
+      <Typography
+        variant="h2"
+        sx={{ textAlign: "left", mb: 1, color: "black", fontFamily: "cursive" }}
+      >
+        Cards Page
+        <Typography
+          variant="h5"
+          sx={{ textAlign: "left", mb: 10, color: "black" }}
+        >
+          Here you can find business cards from all categories.
+        </Typography>
+      </Typography>
       <Grid container spacing={2} mt={2}>
         {dataFromServerFiltered.slice(0, count).map((item, index) => (
           <Grid item lg={3} md={6} xs={12} key={"cards" + index}>
@@ -87,12 +92,11 @@ const HomePage = () => {
       <Grid sx={{ textAlign: "center", position: "relative", mb: 10 }}>
         {count < dataFromServerFiltered.length && (
           <Button
-            variant="contained"
             endIcon={<ExpandMoreIcon />}
             onClick={handleShowMore}
             color="primary"
             fullWidth
-            sx={{ mt: 2, bgcolor: "#ff5722" }}
+            sx={{ mt: 2, bgcolor: "#ff5722", color: "black" }}
           >
             Show More Cards
           </Button>
